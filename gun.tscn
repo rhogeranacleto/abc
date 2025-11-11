@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhj2iutrs6in8"]
+
+[ext_resource type="Script" uid="uid://6mcq01sy3d5c" path="res://gun.gd" id="1_vk1bi"]
+[ext_resource type="Texture2D" uid="uid://doowry3rmkwre" path="res://gun.png" id="2_dk5gl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kw0bs"]
+atlas = ExtResource("2_dk5gl")
+region = Rect2(122, 142.5, 181, 62)
+
+[node name="Gun" type="Node2D"]
+script = ExtResource("1_vk1bi")
+
+[node name="Cooldown" type="Timer" parent="."]
+autostart = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(23.999996, 5)
+scale = Vector2(0.275, 0.275)
+texture = SubResource("AtlasTexture_kw0bs")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(50, -1)
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
