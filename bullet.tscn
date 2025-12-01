@@ -1,19 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://8rmx7af40adk"]
+[gd_scene load_steps=4 format=3 uid="uid://ds16y5s0r4nw8"]
 
-[ext_resource type="Script" uid="uid://ba65od6p7kbah" path="res://bullet.gd" id="1_v7oki"]
+[ext_resource type="Script" uid="uid://c3g2iffx58jmp" path="res://bullet.gd" id="1_v7oki"]
+[ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="2_v8qja"]
 
-[node name="Bullet" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_v7oki"]
+radius = 32.0
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_v7oki")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v7oki")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -35.0
+offset_top = -56.0
+offset_right = 35.0
+offset_bottom = 40.0
+text = "🥎"
+label_settings = ExtResource("2_v8qja")
+
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(2, 1)
+rect = Rect2(-33, -33, 66, 66)
 
-[node name="BulletSprite" type="Label" parent="."]
-offset_left = -8.999999
-offset_top = -56.999996
-offset_right = -3.999999
-offset_bottom = -33.999996
-scale = Vector2(5, 5)
-text = "·"
-
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

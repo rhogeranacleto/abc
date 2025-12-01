@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg5b4405jx1u8"]
+
+[ext_resource type="Texture2D" uid="uid://dummsau6f0b0h" path="res://grass.webp" id="1_wpsn8"]
+[ext_resource type="PackedScene" uid="uid://dv8kgrg5e610f" path="res://Letter.tscn" id="2_2d1aj"]
+[ext_resource type="PackedScene" uid="uid://bim8yrun5ak7u" path="res://target.tscn" id="3_xn68f"]
+[ext_resource type="PackedScene" uid="uid://b0ts4ha3plrwf" path="res://enemy_spawner.tscn" id="4_xn68f"]
+
+[node name="TestGame" type="Node2D"]
+
+[node name="Grass" type="Sprite2D" parent="."]
+position = Vector2(577.5, 328.5)
+scale = Vector2(8.292857, 4.6642857)
+texture = ExtResource("1_wpsn8")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_2d1aj")]
+position = Vector2(287, 248)
+
+[node name="Target" parent="." instance=ExtResource("3_xn68f")]
+position = Vector2(869, 270)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("4_xn68f")]
+position = Vector2(747, 472)
+enemy_scene = ExtResource("3_xn68f")

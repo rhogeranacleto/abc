@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://bim8yrun5ak7u"]
+
+[ext_resource type="Script" uid="uid://cfme1l6fnhjgx" path="res://target.gd" id="1_e1yvt"]
+[ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_t2jmu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2jmu"]
+size = Vector2(66, 66)
+
+[node name="Area2D" type="Area2D" groups=["target"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_e1yvt")
+life = 20
+
+[node name="Label" type="Label" parent="."]
+offset_left = -34.0
+offset_top = -55.0
+offset_right = 36.0
+offset_bottom = 41.0
+text = "👻"
+label_settings = ExtResource("1_t2jmu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_t2jmu")
+
+[node name="LifeIndicator" type="Label" parent="."]
+offset_left = -16.0
+offset_top = -60.0
+offset_right = 24.0
+offset_bottom = -37.0
+text = "100"
+
+[connection signal="hurt" from="." to="." method="_on_hurt"]
