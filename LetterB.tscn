@@ -1,12 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://dv8kgrg5e610f"]
+[gd_scene load_steps=14 format=3 uid="uid://5e7d1ismiiis"]
 
-[ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_7k17h"]
-[ext_resource type="Script" uid="uid://cn2nvmsl6250d" path="res://ai/tasks/shoot.gd" id="3_gm3ap"]
-[ext_resource type="Script" uid="uid://cojm12uuvx2x7" path="res://ai/tasks/theres_target.gd" id="3_jpu73"]
-[ext_resource type="PackedScene" uid="uid://ds16y5s0r4nw8" path="res://bullet.tscn" id="4_088p8"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p26s3"]
-size = Vector2(46, 51)
+[ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_fgpmi"]
+[ext_resource type="Script" uid="uid://cojm12uuvx2x7" path="res://ai/tasks/theres_target.gd" id="2_dc8qm"]
+[ext_resource type="PackedScene" uid="uid://ds16y5s0r4nw8" path="res://bullet.tscn" id="3_7wl1p"]
+[ext_resource type="Script" uid="uid://cn2nvmsl6250d" path="res://ai/tasks/shoot.gd" id="4_2rwi7"]
+[ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://hurt_box.tscn" id="5_fgpmi"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_7k17h"]
 var/nearest_target/name = &"nearest_target"
@@ -16,11 +14,11 @@ var/nearest_target/hint = 0
 var/nearest_target/hint_string = ""
 
 [sub_resource type="BTCondition" id="BTCondition_088p8"]
-script = ExtResource("3_jpu73")
+script = ExtResource("2_dc8qm")
 
 [sub_resource type="BTAction" id="BTAction_jpu73"]
-script = ExtResource("3_gm3ap")
-BULLET = ExtResource("4_088p8")
+script = ExtResource("4_2rwi7")
+BULLET = ExtResource("3_7wl1p")
 
 [sub_resource type="BTCooldown" id="BTCooldown_7k17h"]
 duration = 0.5
@@ -35,20 +33,25 @@ root_task = SubResource("BTSequence_u57or")
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_gm3ap"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" groups=["soldier"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fgpmi"]
+size = Vector2(39, 53)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3.5)
-shape = SubResource("RectangleShape2D_p26s3")
+[node name="LetterA" type="Node2D" groups=["soldier"]]
 
 [node name="Label" type="Label" parent="."]
 offset_left = -23.0
 offset_top = -53.0
 offset_right = 23.0
 offset_bottom = 43.0
-text = "A"
-label_settings = ExtResource("1_7k17h")
+text = "B"
+label_settings = ExtResource("1_fgpmi")
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 behavior_tree = SubResource("BehaviorTree_u57or")
 blackboard_plan = SubResource("BlackboardPlan_gm3ap")
+
+[node name="HurtBox" parent="." instance=ExtResource("5_fgpmi")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(1.5, -3.5)
+shape = SubResource("RectangleShape2D_fgpmi")
