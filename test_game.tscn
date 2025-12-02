@@ -15,9 +15,24 @@ texture = ExtResource("1_wpsn8")
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_2d1aj")]
 position = Vector2(287, 248)
 
-[node name="Target" parent="." instance=ExtResource("3_xn68f")]
-position = Vector2(869, 270)
-
 [node name="EnemySpawner" parent="." instance=ExtResource("4_xn68f")]
-position = Vector2(747, 472)
+position = Vector2(1071, 577)
 enemy_scene = ExtResource("3_xn68f")
+
+[node name="Timer" parent="EnemySpawner" index="0"]
+wait_time = 2.0
+
+[node name="EnemySpawner2" parent="." instance=ExtResource("4_xn68f")]
+position = Vector2(775, 130)
+enemy_scene = ExtResource("3_xn68f")
+
+[node name="Timer" parent="EnemySpawner2" index="0"]
+wait_time = 5.0
+
+[node name="EnemySpawner3" parent="." instance=ExtResource("4_xn68f")]
+position = Vector2(58, 59)
+enemy_scene = ExtResource("3_xn68f")
+
+[editable path="EnemySpawner"]
+[editable path="EnemySpawner2"]
+[editable path="EnemySpawner3"]

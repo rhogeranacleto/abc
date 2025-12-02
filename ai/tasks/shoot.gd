@@ -1,16 +1,18 @@
 extends BTAction
 
-const BULLET = preload("uid://ds16y5s0r4nw8")
+@export var BULLET : PackedScene
 
-func _tick(delta: float) -> Status:
-	var first = scene_root.get_tree().get_nodes_in_group('target').get(0)
+func _tick(_delta: float) -> Status:
+	var nearest: Node2D = blackboard.get_var('nearest_target')
 	
-	var direction = agent.position.direction_to(first.position).normalized()
+	if not is_instance_valid(nearest):
+		return FAILURE
+	
+	var direction = agent.global_position.direction_to(nearest.global_position).normalized()
 	var bullet = BULLET.instantiate()
 	
 	scene_root.get_tree().root.add_child(bullet)
 	
 	bullet.global_position = agent.global_position
 	bullet.direction = direction
-	print('success')
 	return SUCCESS

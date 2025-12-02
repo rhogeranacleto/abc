@@ -1,23 +1,29 @@
 [gd_scene load_steps=13 format=3 uid="uid://dv8kgrg5e610f"]
 
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_7k17h"]
-[ext_resource type="Script" uid="uid://l8f33d7xtrfy" path="res://shoot.gd" id="1_u57or"]
 [ext_resource type="Script" uid="uid://cn2nvmsl6250d" path="res://ai/tasks/shoot.gd" id="3_gm3ap"]
 [ext_resource type="Script" uid="uid://cojm12uuvx2x7" path="res://ai/tasks/theres_target.gd" id="3_jpu73"]
+[ext_resource type="PackedScene" uid="uid://ds16y5s0r4nw8" path="res://bullet.tscn" id="4_088p8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p26s3"]
 size = Vector2(46, 51)
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_7k17h"]
+var/nearest_target/name = &"nearest_target"
+var/nearest_target/type = 22
+var/nearest_target/value = NodePath("")
+var/nearest_target/hint = 0
+var/nearest_target/hint_string = ""
 
 [sub_resource type="BTCondition" id="BTCondition_088p8"]
 script = ExtResource("3_jpu73")
 
 [sub_resource type="BTAction" id="BTAction_jpu73"]
 script = ExtResource("3_gm3ap")
+BULLET = ExtResource("4_088p8")
 
 [sub_resource type="BTCooldown" id="BTCooldown_7k17h"]
-duration = 2.0
+duration = 0.5
 children = [SubResource("BTAction_jpu73")]
 
 [sub_resource type="BTSequence" id="BTSequence_u57or"]
@@ -29,8 +35,7 @@ root_task = SubResource("BTSequence_u57or")
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_gm3ap"]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
-script = ExtResource("1_u57or")
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["soldier"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
