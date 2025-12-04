@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://5e7d1ismiiis"]
+[gd_scene load_steps=19 format=3 uid="uid://5e7d1ismiiis"]
 
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_fgpmi"]
-[ext_resource type="Script" uid="uid://cojm12uuvx2x7" path="res://ai/tasks/theres_target.gd" id="2_dc8qm"]
-[ext_resource type="PackedScene" uid="uid://ds16y5s0r4nw8" path="res://bullet.tscn" id="3_7wl1p"]
-[ext_resource type="Script" uid="uid://cn2nvmsl6250d" path="res://ai/tasks/shoot.gd" id="4_2rwi7"]
+[ext_resource type="Script" uid="uid://beadd80bw35lj" path="res://ai/tasks/is_target_in_area.gd" id="2_icdpu"]
+[ext_resource type="Script" uid="uid://cksudg7mkfdvk" path="res://weapon_damage.gd" id="4_j52fi"]
 [ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://hurt_box.tscn" id="5_fgpmi"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_7k17h"]
@@ -13,21 +12,26 @@ var/nearest_target/value = NodePath("")
 var/nearest_target/hint = 0
 var/nearest_target/hint_string = ""
 
-[sub_resource type="BTCondition" id="BTCondition_088p8"]
-script = ExtResource("2_dc8qm")
+[sub_resource type="BTCondition" id="BTCondition_j52fi"]
+script = ExtResource("2_icdpu")
+area_range = NodePath("Weapon/WeaponRange")
 
-[sub_resource type="BTAction" id="BTAction_jpu73"]
-script = ExtResource("4_2rwi7")
-BULLET = ExtResource("3_7wl1p")
+[sub_resource type="BBNode" id="BBNode_icdpu"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_j52fi"]
+animation_player = SubResource("BBNode_icdpu")
+animation_name = &"attack"
 
 [sub_resource type="BTCooldown" id="BTCooldown_7k17h"]
-duration = 0.5
-children = [SubResource("BTAction_jpu73")]
+duration = 0.8
+children = [SubResource("BTPlayAnimation_j52fi")]
 
 [sub_resource type="BTSequence" id="BTSequence_u57or"]
-children = [SubResource("BTCondition_088p8"), SubResource("BTCooldown_7k17h")]
+children = [SubResource("BTCondition_j52fi"), SubResource("BTCooldown_7k17h")]
 
-[sub_resource type="BehaviorTree" id="BehaviorTree_u57or"]
+[sub_resource type="BehaviorTree" id="BehaviorTree_fgpmi"]
 blackboard_plan = SubResource("BlackboardPlan_7k17h")
 root_task = SubResource("BTSequence_u57or")
 
@@ -36,7 +40,50 @@ root_task = SubResource("BTSequence_u57or")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fgpmi"]
 size = Vector2(39, 53)
 
-[node name="LetterA" type="Node2D" groups=["soldier"]]
+[sub_resource type="Animation" id="Animation_dc8qm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_fgpmi"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7wl1p"]
+_data = {
+&"RESET": SubResource("Animation_dc8qm"),
+&"attack": SubResource("Animation_fgpmi")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dc8qm"]
+size = Vector2(10, 50)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_usgmu"]
+radius = 86.09297
+
+[node name="LetterB" type="Node2D" groups=["soldier"]]
 
 [node name="Label" type="Label" parent="."]
 offset_left = -23.0
@@ -47,7 +94,7 @@ text = "B"
 label_settings = ExtResource("1_fgpmi")
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
-behavior_tree = SubResource("BehaviorTree_u57or")
+behavior_tree = SubResource("BehaviorTree_fgpmi")
 blackboard_plan = SubResource("BlackboardPlan_gm3ap")
 
 [node name="HurtBox" parent="." instance=ExtResource("5_fgpmi")]
@@ -55,3 +102,36 @@ blackboard_plan = SubResource("BlackboardPlan_gm3ap")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(1.5, -3.5)
 shape = SubResource("RectangleShape2D_fgpmi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7wl1p")
+}
+
+[node name="Weapon" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Weapon"]
+offset_left = -5.0
+offset_top = -82.0
+offset_right = 5.0
+offset_bottom = -32.0
+
+[node name="Area2D" type="Area2D" parent="Weapon/ColorRect"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("4_j52fi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/ColorRect/Area2D"]
+position = Vector2(5, 25)
+shape = SubResource("RectangleShape2D_dc8qm")
+
+[node name="WeaponRange" type="Area2D" parent="Weapon"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/WeaponRange"]
+shape = SubResource("CircleShape2D_usgmu")
+
+[connection signal="area_entered" from="Weapon/ColorRect/Area2D" to="Weapon/ColorRect/Area2D" method="_on_area_entered"]

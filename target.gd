@@ -12,6 +12,9 @@ extends Area2D
 
 signal hurt(amount: int)
 
+func _ready() -> void:
+	life_indicator.text = str(life)
+
 func _on_hurt(amount: int) -> void:
 	life -= amount
 	
