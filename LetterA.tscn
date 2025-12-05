@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dv8kgrg5e610f"]
+[gd_scene load_steps=15 format=3 uid="uid://dv8kgrg5e610f"]
 
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_7k17h"]
 [ext_resource type="Script" uid="uid://cn2nvmsl6250d" path="res://ai/tasks/shoot.gd" id="3_gm3ap"]
 [ext_resource type="Script" uid="uid://cojm12uuvx2x7" path="res://ai/tasks/theres_target.gd" id="3_jpu73"]
 [ext_resource type="PackedScene" uid="uid://ds16y5s0r4nw8" path="res://bullet.tscn" id="4_088p8"]
 [ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://hurt_box.tscn" id="5_5rj57"]
+[ext_resource type="PackedScene" uid="uid://dhj2iutrs6in8" path="res://gun.tscn" id="6_hjiw3"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_7k17h"]
 var/nearest_target/name = &"nearest_target"
@@ -55,3 +56,6 @@ blackboard_plan = SubResource("BlackboardPlan_gm3ap")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_5rj57")
+
+[node name="Gun" parent="." instance=ExtResource("6_hjiw3")]
+scale = Vector2(0.38, 0.38)
