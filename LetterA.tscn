@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://dv8kgrg5e610f"]
+[gd_scene load_steps=16 format=3 uid="uid://dv8kgrg5e610f"]
 
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_7k17h"]
+[ext_resource type="Script" uid="uid://dgwrio88j16es" path="res://letter_a.gd" id="1_yojyf"]
 [ext_resource type="Script" uid="uid://cn2nvmsl6250d" path="res://ai/tasks/shoot.gd" id="3_gm3ap"]
-[ext_resource type="Script" uid="uid://cojm12uuvx2x7" path="res://ai/tasks/theres_target.gd" id="3_jpu73"]
+[ext_resource type="Script" uid="uid://beadd80bw35lj" path="res://ai/tasks/is_target_in_area.gd" id="3_yojyf"]
 [ext_resource type="PackedScene" uid="uid://ds16y5s0r4nw8" path="res://bullet.tscn" id="4_088p8"]
 [ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://hurt_box.tscn" id="5_5rj57"]
 [ext_resource type="PackedScene" uid="uid://dhj2iutrs6in8" path="res://gun.tscn" id="6_hjiw3"]
@@ -14,19 +15,16 @@ var/nearest_target/value = NodePath("")
 var/nearest_target/hint = 0
 var/nearest_target/hint_string = ""
 
-[sub_resource type="BTCondition" id="BTCondition_088p8"]
-script = ExtResource("3_jpu73")
+[sub_resource type="BTCondition" id="BTCondition_akvt2"]
+script = ExtResource("3_yojyf")
+area_range = NodePath("GunRange")
 
-[sub_resource type="BTAction" id="BTAction_jpu73"]
+[sub_resource type="BTAction" id="BTAction_yojyf"]
 script = ExtResource("3_gm3ap")
-BULLET = ExtResource("4_088p8")
-
-[sub_resource type="BTCooldown" id="BTCooldown_7k17h"]
-duration = 0.5
-children = [SubResource("BTAction_jpu73")]
+gun = NodePath("Gun")
 
 [sub_resource type="BTSequence" id="BTSequence_u57or"]
-children = [SubResource("BTCondition_088p8"), SubResource("BTCooldown_7k17h")]
+children = [SubResource("BTCondition_akvt2"), SubResource("BTAction_yojyf")]
 
 [sub_resource type="BehaviorTree" id="BehaviorTree_u57or"]
 blackboard_plan = SubResource("BlackboardPlan_7k17h")
@@ -37,7 +35,11 @@ root_task = SubResource("BTSequence_u57or")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5rj57"]
 size = Vector2(48, 53)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4fvt3"]
+radius = 300.0
+
 [node name="LetterA" type="Node2D" groups=["soldier"]]
+script = ExtResource("1_yojyf")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -23.0
@@ -59,3 +61,12 @@ shape = SubResource("RectangleShape2D_5rj57")
 
 [node name="Gun" parent="." instance=ExtResource("6_hjiw3")]
 scale = Vector2(0.38, 0.38)
+BULLET = ExtResource("4_088p8")
+cooldown = 0.3
+
+[node name="GunRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GunRange"]
+shape = SubResource("CircleShape2D_4fvt3")

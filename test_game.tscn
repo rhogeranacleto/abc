@@ -1,11 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bg5b4405jx1u8"]
+[gd_scene load_steps=5 format=3 uid="uid://bg5b4405jx1u8"]
 
 [ext_resource type="Texture2D" uid="uid://dummsau6f0b0h" path="res://grass.webp" id="1_wpsn8"]
 [ext_resource type="PackedScene" uid="uid://dv8kgrg5e610f" path="res://LetterA.tscn" id="2_2d1aj"]
 [ext_resource type="PackedScene" uid="uid://bim8yrun5ak7u" path="res://target.tscn" id="3_xn68f"]
 [ext_resource type="PackedScene" uid="uid://b0ts4ha3plrwf" path="res://enemy_spawner.tscn" id="4_xn68f"]
-[ext_resource type="PackedScene" uid="uid://5e7d1ismiiis" path="res://LetterB.tscn" id="5_0lb5u"]
-[ext_resource type="PackedScene" uid="uid://j81bd4hg1vx" path="res://LetterC.tscn" id="6_vkvqs"]
 
 [node name="TestGame" type="Node2D"]
 
@@ -13,9 +11,6 @@
 position = Vector2(577.5, 328.5)
 scale = Vector2(8.292857, 4.6642857)
 texture = ExtResource("1_wpsn8")
-
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_2d1aj")]
-position = Vector2(154, 345)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_xn68f")]
 position = Vector2(1071, 577)
@@ -35,11 +30,8 @@ wait_time = 5.0
 position = Vector2(58, 59)
 enemy_scene = ExtResource("3_xn68f")
 
-[node name="LetterA" parent="EnemySpawner3" instance=ExtResource("5_0lb5u")]
-position = Vector2(1003, 51)
-
-[node name="LetterC" parent="." instance=ExtResource("6_vkvqs")]
-position = Vector2(560, 470)
+[node name="LetterA" parent="." instance=ExtResource("2_2d1aj")]
+position = Vector2(312, 413)
 
 [editable path="EnemySpawner"]
 [editable path="EnemySpawner2"]

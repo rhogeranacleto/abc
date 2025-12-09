@@ -12,3 +12,6 @@ texture = ExtResource("1_vk1bi")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(175, -16)
+
+[node name="Cooldown" type="Timer" parent="."]
+one_shot = true
