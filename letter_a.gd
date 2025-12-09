@@ -3,8 +3,6 @@ extends Node2D
 @onready var gun: Node2D = $Gun
 @onready var bt_player: BTPlayer = $BTPlayer
 
-#@export var gun
-
 func _process(delta: float) -> void:
 	var target = bt_player.blackboard.get_var('nearest_target')
 	

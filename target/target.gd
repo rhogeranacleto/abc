@@ -1,26 +1,6 @@
-extends Area2D
+extends Node2D
 
 @export var speed = 100
-
-@export var life = 100:
-	set(value):
-		life = value
-		if life_indicator:
-			life_indicator.text = str(value)
-
-@onready var life_indicator: Label = $LifeIndicator
-
-signal hurt(amount: int)
-
-func _ready() -> void:
-	life_indicator.text = str(life)
-
-func _on_hurt(amount: int) -> void:
-	life -= amount
-	
-	if life <= 0:
-		queue_free()
-	pass # Replace with function body.
 
 func _process(delta: float) -> void:
 	var soldiers = get_tree().get_nodes_in_group('soldier')

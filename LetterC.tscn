@@ -2,7 +2,7 @@
 
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_qgwdn"]
 [ext_resource type="Script" uid="uid://beadd80bw35lj" path="res://ai/tasks/is_target_in_area.gd" id="2_fvx5r"]
-[ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://hurt_box.tscn" id="3_udkfm"]
+[ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://components/hurtbox/hurt_box.tscn" id="3_udkfm"]
 [ext_resource type="Texture2D" uid="uid://dxfyhld4qs6qp" path="res://red-circle.webp" id="4_qgwdn"]
 [ext_resource type="Script" uid="uid://nosnkkahtboe" path="res://shock_damage.gd" id="5_fvx5r"]
 
@@ -133,11 +133,21 @@ label_settings = ExtResource("1_qgwdn")
 behavior_tree = SubResource("BehaviorTree_qgwdn")
 blackboard_plan = SubResource("BlackboardPlan_gm3ap")
 
-[node name="HurtBox" parent="." instance=ExtResource("3_udkfm")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_bar", "agent") instance=ExtResource("3_udkfm")]
+collision_layer = 1
+health_bar = NodePath("ProgressBar")
+agent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(1.5, -3.5)
 shape = SubResource("RectangleShape2D_fgpmi")
+
+[node name="ProgressBar" type="ProgressBar" parent="HurtBox"]
+offset_left = -60.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = -35.0
+value = 100.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
