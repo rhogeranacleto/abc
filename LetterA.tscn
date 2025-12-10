@@ -1,12 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://dv8kgrg5e610f"]
+[gd_scene load_steps=15 format=3 uid="uid://dv8kgrg5e610f"]
 
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_7k17h"]
-[ext_resource type="Script" uid="uid://dgwrio88j16es" path="res://letter_a.gd" id="1_yojyf"]
 [ext_resource type="Script" uid="uid://cn2nvmsl6250d" path="res://ai/tasks/shoot.gd" id="3_gm3ap"]
 [ext_resource type="Script" uid="uid://beadd80bw35lj" path="res://ai/tasks/is_target_in_area.gd" id="3_yojyf"]
 [ext_resource type="PackedScene" uid="uid://ds16y5s0r4nw8" path="res://bullet.tscn" id="4_088p8"]
 [ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://components/hurtbox/hurt_box.tscn" id="5_5rj57"]
-[ext_resource type="PackedScene" uid="uid://dhj2iutrs6in8" path="res://gun.tscn" id="6_hjiw3"]
+[ext_resource type="PackedScene" uid="uid://dhj2iutrs6in8" path="res://components/weapons/shooting_gun/shooting_gun.tscn" id="6_hjiw3"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_7k17h"]
 var/nearest_target/name = &"nearest_target"
@@ -17,7 +16,7 @@ var/nearest_target/hint_string = ""
 
 [sub_resource type="BTCondition" id="BTCondition_akvt2"]
 script = ExtResource("3_yojyf")
-area_range = NodePath("GunRange")
+area_range = NodePath("Gun")
 
 [sub_resource type="BTAction" id="BTAction_yojyf"]
 script = ExtResource("3_gm3ap")
@@ -39,7 +38,6 @@ size = Vector2(48, 53)
 radius = 300.0
 
 [node name="LetterA" type="Node2D" groups=["soldier"]]
-script = ExtResource("1_yojyf")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -23.0
@@ -64,14 +62,12 @@ shape = SubResource("RectangleShape2D_5rj57")
 
 [node name="Gun" parent="." instance=ExtResource("6_hjiw3")]
 scale = Vector2(0.38, 0.38)
+collision_mask = 2
 BULLET = ExtResource("4_088p8")
 cooldown = 0.3
 
-[node name="GunRange" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GunRange"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gun"]
+scale = Vector2(2.631579, 2.631579)
 shape = SubResource("CircleShape2D_4fvt3")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]

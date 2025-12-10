@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhj2iutrs6in8"]
+
+[ext_resource type="Script" uid="uid://6mcq01sy3d5c" path="res://components/weapons/shooting_gun/shooting_gun.gd" id="1_6cvfp"]
+[ext_resource type="Texture2D" uid="uid://doowry3rmkwre" path="res://components/weapons/shooting_gun/gun.png" id="2_tgm7x"]
+
+[node name="ShootingGun" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+script = ExtResource("1_6cvfp")
+
+[node name="Gun" type="Sprite2D" parent="."]
+position = Vector2(87, 0)
+texture = ExtResource("2_tgm7x")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(175, -16)
+
+[node name="Cooldown" type="Timer" parent="."]
+one_shot = true

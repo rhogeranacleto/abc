@@ -9,7 +9,7 @@
 [node name="TestGame" type="Node2D"]
 
 [node name="Grass" type="Sprite2D" parent="."]
-position = Vector2(577.5, 328.5)
+position = Vector2(575, 323.00003)
 scale = Vector2(8.292857, 4.6642857)
 texture = ExtResource("1_wpsn8")
 
