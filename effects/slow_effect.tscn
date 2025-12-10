@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjscsaa2uxoh8"]
+
+[sub_resource type="GDScript" id="GDScript_m0yww"]
+script/source = "extends Timer
+
+@export var speed_modifier : float
+
+func _on_timeout() -> void:
+	queue_free()
+"
+
+[node name="SlowEffect" type="Timer"]
+one_shot = true
+autostart = true
+script = SubResource("GDScript_m0yww")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

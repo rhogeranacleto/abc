@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dto1t3clx6j88"]
+
+[ext_resource type="Script" uid="uid://bqa2alitwsdl1" path="res://effects/damage_overtime_effect.gd" id="1_8j0b5"]
+
+[node name="DamageOvertimeEffect" type="Timer"]
+one_shot = true
+autostart = true
+script = ExtResource("1_8j0b5")
+
+[node name="IntervalTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]
+[connection signal="timeout" from="IntervalTimer" to="." method="_on_interval_timer_timeout"]

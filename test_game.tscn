@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bg5b4405jx1u8"]
+[gd_scene load_steps=4 format=3 uid="uid://bg5b4405jx1u8"]
 
 [ext_resource type="Texture2D" uid="uid://dummsau6f0b0h" path="res://grass.webp" id="1_wpsn8"]
-[ext_resource type="PackedScene" uid="uid://dv8kgrg5e610f" path="res://LetterA.tscn" id="2_2d1aj"]
+[ext_resource type="PackedScene" uid="uid://j81bd4hg1vx" path="res://LetterC.tscn" id="3_2d1aj"]
 [ext_resource type="PackedScene" uid="uid://bim8yrun5ak7u" path="res://target/target.tscn" id="3_xn68f"]
-[ext_resource type="PackedScene" uid="uid://j81bd4hg1vx" path="res://LetterC.tscn" id="4_0lb5u"]
-[ext_resource type="PackedScene" uid="uid://b0ts4ha3plrwf" path="res://enemy_spawner.tscn" id="4_xn68f"]
 
 [node name="TestGame" type="Node2D"]
 
@@ -13,30 +11,16 @@ position = Vector2(575, 323.00003)
 scale = Vector2(8.292857, 4.6642857)
 texture = ExtResource("1_wpsn8")
 
-[node name="EnemySpawner" parent="." instance=ExtResource("4_xn68f")]
-position = Vector2(1071, 577)
-enemy_scene = ExtResource("3_xn68f")
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(1025, 303)
 
-[node name="Timer" parent="EnemySpawner" index="0"]
-wait_time = 2.0
+[node name="Target" parent="." instance=ExtResource("3_xn68f")]
+position = Vector2(290, 318)
 
-[node name="EnemySpawner2" parent="." instance=ExtResource("4_xn68f")]
-position = Vector2(712, 291)
-enemy_scene = ExtResource("3_xn68f")
+[node name="Legs" parent="Target" index="0" node_paths=PackedStringArray("target")]
+target = NodePath("../../Marker2D")
 
-[node name="Timer" parent="EnemySpawner2" index="0"]
-wait_time = 5.0
+[node name="LetterC" parent="." instance=ExtResource("3_2d1aj")]
+position = Vector2(541, 208)
 
-[node name="EnemySpawner3" parent="." instance=ExtResource("4_xn68f")]
-position = Vector2(58, 59)
-enemy_scene = ExtResource("3_xn68f")
-
-[node name="LetterC" parent="." instance=ExtResource("4_0lb5u")]
-position = Vector2(398, 427)
-
-[node name="LetterA" parent="." instance=ExtResource("2_2d1aj")]
-position = Vector2(627, 121)
-
-[editable path="EnemySpawner"]
-[editable path="EnemySpawner2"]
-[editable path="EnemySpawner3"]
+[editable path="Target"]

@@ -8,28 +8,54 @@ extends Area2D
 		if max_health < health:
 			health = max_health
 		
-		health_bar.max_value = max_health
+		if health_bar != null:
+			health_bar.max_value = max_health
 		
 @export var health = 100 :
 	set(value):
 		health = min(value, max_health)
-		health_bar.value = health
+		if health_bar != null:
+			health_bar.value = health
 
 @export var health_bar : ProgressBar
 @export var agent : Node2D
+@export var legs : Node2D
 
 @onready var cooldown_timer: Timer = $Cooldown
 
+const DAMAGE_OVERTIME_EFFECT = preload("uid://dto1t3clx6j88")
+
 signal hurt(amount: float)
+signal effect_hurt(amount: float)
+signal effects_applied(effects: Array[Effect])
+
+func _ready() -> void:
+	health_bar.max_value = max_health
+	health_bar.value = health
+	
+func take_damage(amount):
+	health -= amount
+	
+	if health < 0 and agent != null:
+		agent.queue_free()
 
 func _on_hurt(amount: float) -> void:
 	if not cooldown_timer.is_stopped():
 		return
 	
-	health -= amount
+	take_damage(amount)
 	
 	if cooldown > 0.0:
 		cooldown_timer.start(cooldown)
 	
-	if health < 0 and agent != null:
-		agent.queue_free()
+func _on_effects_applied(effects: Array[Effect]) -> void:
+	for effect in effects:
+		match effect.get_script():
+			DamageOverTimeEffect:
+				var damage_overtime = DAMAGE_OVERTIME_EFFECT.instantiate()
+				damage_overtime.config = effect
+				add_child(damage_overtime)
+			OneHitDamage:
+				_on_hurt(effect.damage)
+			SlowEffect:
+				legs.emit_signal('slowed', effect.speed_modifier, effect.duration)

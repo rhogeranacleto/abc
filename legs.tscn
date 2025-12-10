@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk4h6kaalpqme"]
+
+[ext_resource type="Script" uid="uid://cyhavhe45fujw" path="res://legs.gd" id="1_5fopk"]
+
+[node name="Legs" type="Node2D"]
+script = ExtResource("1_5fopk")
+
+[node name="SlowCooldown" type="Timer" parent="."]
+
+[connection signal="slowed" from="." to="." method="_on_slow"]
