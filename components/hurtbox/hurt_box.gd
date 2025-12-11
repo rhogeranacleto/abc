@@ -18,7 +18,6 @@ extends Area2D
 			health_bar.value = health
 
 @export var health_bar : ProgressBar
-@export var agent : Node2D
 @export var legs : Node2D
 
 @onready var cooldown_timer: Timer = $Cooldown
@@ -42,9 +41,10 @@ func take_damage(amount):
 	damage_hit.value = amount
 	damage_hit.global_position = global_position
 	get_tree().root.add_child(damage_hit)
+	damage_hit.owner = owner
 	
-	if health < 0 and agent != null:
-		agent.queue_free()
+	if health < 0 and owner != null:
+		owner.queue_free()
 
 func _on_hurt(amount: float) -> void:
 	if not cooldown_timer.is_stopped():

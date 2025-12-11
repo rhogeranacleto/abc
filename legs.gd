@@ -1,7 +1,6 @@
 extends Node2D
 
 @export var speed : float
-@export var agent : Node2D
 @export var target : Node2D
 @export var sprite : CanvasItem
 
@@ -16,8 +15,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if target != null and current_speed > 0:
-			var direction = agent.global_position.direction_to(target.global_position).normalized()
-			agent.global_position += direction * current_speed * delta
+			var direction = owner.global_position.direction_to(target.global_position).normalized()
+			owner.global_position += direction * current_speed * delta
 
 func calculate_speed() -> float:
 	var all_effect_modifier = get_children().reduce(func (amount, child): return amount * child.speed_modifier, 1)
