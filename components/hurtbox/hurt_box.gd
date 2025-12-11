@@ -24,7 +24,7 @@ extends Area2D
 @onready var cooldown_timer: Timer = $Cooldown
 
 const DAMAGE_OVERTIME_EFFECT = preload("uid://dto1t3clx6j88")
-const DAMAGE_HIT_COUNT = preload("uid://bxe58yo6eqj7b")
+const DAMAGE_HIT_DISPLAY = preload("uid://bxe58yo6eqj7b")
 
 signal hurt(amount: float)
 signal effect_hurt(amount: float)
@@ -37,7 +37,7 @@ func _ready() -> void:
 func take_damage(amount):
 	health -= amount
 	
-	var damage_hit = DAMAGE_HIT_COUNT.instantiate()
+	var damage_hit = DAMAGE_HIT_DISPLAY.instantiate()
 	
 	damage_hit.value = amount
 	damage_hit.global_position = global_position

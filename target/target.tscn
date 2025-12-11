@@ -11,7 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_fash6"]
 script = ExtResource("6_n0ue5")
-damage = 20
+damage = 17
 metadata/_custom_type_script = "uid://bgho0nn52h27q"
 
 [node name="Target" type="Node2D" groups=["target"]]

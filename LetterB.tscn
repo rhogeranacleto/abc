@@ -105,7 +105,7 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_7wl1p"]
 script = ExtResource("6_dc8qm")
-damage = 2
+damage = 3
 metadata/_custom_type_script = "uid://bgho0nn52h27q"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dc8qm"]
@@ -160,9 +160,7 @@ offset_bottom = -32.0
 [node name="HitBox" parent="Weapon" instance=ExtResource("4_j52fi")]
 collision_mask = 2
 monitoring = false
-damage = 40.0
 effects = Array[ExtResource("5_dc8qm")]([SubResource("Resource_7wl1p")])
-mode = "one_hit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/HitBox"]
 position = Vector2(0, -57)
