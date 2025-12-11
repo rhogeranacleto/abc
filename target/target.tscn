@@ -11,9 +11,10 @@
 script = ExtResource("1_e1yvt")
 speed = 0
 
-[node name="Legs" parent="." node_paths=PackedStringArray("agent") instance=ExtResource("2_85njf")]
+[node name="Legs" parent="." node_paths=PackedStringArray("agent", "sprite") instance=ExtResource("2_85njf")]
 speed = 50.0
 agent = NodePath("..")
+sprite = NodePath("../Sprite")
 
 [node name="Sprite" type="Label" parent="."]
 offset_left = -34.0

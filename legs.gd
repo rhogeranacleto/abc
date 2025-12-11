@@ -3,6 +3,7 @@ extends Node2D
 @export var speed : float
 @export var agent : Node2D
 @export var target : Node2D
+@export var sprite : CanvasItem
 
 var current_speed : float
 
@@ -24,9 +25,16 @@ func calculate_speed() -> float:
 	return speed * all_effect_modifier
 
 func _on_slow(modifier: float, duration: float) -> void:
+	if not slow_cooldown.is_stopped():
+		return
+	
 	current_speed = speed * modifier
 	slow_cooldown.start(duration)
+	if sprite != null:
+		sprite.modulate = Color(0.0, 0.408, 1.0)
 	
 	await slow_cooldown.timeout
 	
 	current_speed = speed
+	if sprite:
+		sprite.modulate = Color.WHITE

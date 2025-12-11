@@ -6,9 +6,10 @@
 [ext_resource type="Script" uid="uid://cik0s5iifa3jx" path="res://effects/slow_effect_res.gd" id="4_2b2rl"]
 [ext_resource type="Script" uid="uid://3wtv26ldj4iu" path="res://effects/effect_res.gd" id="4_b7duk"]
 
-[sub_resource type="Resource" id="Resource_t2bd8"]
+[sub_resource type="Resource" id="Resource_b7duk"]
 script = ExtResource("4_2b2rl")
 speed_modifier = 0.5
+duration = 5.0
 metadata/_custom_type_script = "uid://cik0s5iifa3jx"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7oki"]
@@ -31,7 +32,7 @@ rect = Rect2(-33, -33, 66, 66)
 
 [node name="HitBox" parent="." instance=ExtResource("3_t4vbm")]
 collision_mask = 2
-effects = Array[ExtResource("4_b7duk")]([SubResource("Resource_t2bd8")])
+effects = Array[ExtResource("4_b7duk")]([SubResource("Resource_b7duk")])
 mode = "one_hit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://j81bd4hg1vx"]
+[gd_scene load_steps=25 format=3 uid="uid://j81bd4hg1vx"]
 
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_qgwdn"]
 [ext_resource type="Script" uid="uid://beadd80bw35lj" path="res://ai/tasks/is_target_in_area.gd" id="2_fvx5r"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="5_udkfm"]
 [ext_resource type="Script" uid="uid://3wtv26ldj4iu" path="res://effects/effect_res.gd" id="6_s5qym"]
 [ext_resource type="Script" uid="uid://cik0s5iifa3jx" path="res://effects/slow_effect_res.gd" id="7_dx8kp"]
-[ext_resource type="Script" uid="uid://b6q6mmbv7an12" path="res://effects/damage_overtime_effect_res.gd" id="8_dx8kp"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_7k17h"]
 var/nearest_target/name = &"nearest_target"
@@ -192,15 +191,9 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_51m5k"]
 script = ExtResource("7_dx8kp")
-speed_modifier = 0.5
+speed_modifier = 0.7
+duration = 2.0
 metadata/_custom_type_script = "uid://cik0s5iifa3jx"
-
-[sub_resource type="Resource" id="Resource_s6wrt"]
-script = ExtResource("8_dx8kp")
-damage = 3.0
-duration = 5.0
-interval = 0.5
-metadata/_custom_type_script = "uid://b6q6mmbv7an12"
 
 [sub_resource type="Curve" id="Curve_fvx5r"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.27125502, 1), 0.0, 0.0, 0, 0, Vector2(0.61133593, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -256,7 +249,7 @@ texture = ExtResource("4_qgwdn")
 [node name="HitBox" parent="Weapon" instance=ExtResource("5_udkfm")]
 collision_mask = 2
 monitoring = false
-effects = Array[ExtResource("6_s5qym")]([SubResource("Resource_51m5k"), SubResource("Resource_s6wrt")])
+effects = Array[ExtResource("6_s5qym")]([SubResource("Resource_51m5k")])
 mode = "one_hit"
 damage_curve = SubResource("Curve_fvx5r")
 damage_offset = 1.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bg5b4405jx1u8"]
 
 [ext_resource type="Texture2D" uid="uid://dummsau6f0b0h" path="res://grass.webp" id="1_wpsn8"]
-[ext_resource type="PackedScene" uid="uid://j81bd4hg1vx" path="res://LetterC.tscn" id="3_2d1aj"]
+[ext_resource type="PackedScene" uid="uid://5e7d1ismiiis" path="res://LetterB.tscn" id="3_2d1aj"]
 [ext_resource type="PackedScene" uid="uid://bim8yrun5ak7u" path="res://target/target.tscn" id="3_xn68f"]
 
 [node name="TestGame" type="Node2D"]
@@ -15,12 +15,13 @@ texture = ExtResource("1_wpsn8")
 position = Vector2(1025, 303)
 
 [node name="Target" parent="." instance=ExtResource("3_xn68f")]
-position = Vector2(290, 318)
+position = Vector2(134, 315)
 
 [node name="Legs" parent="Target" index="0" node_paths=PackedStringArray("target")]
+speed = 100.0
 target = NodePath("../../Marker2D")
 
-[node name="LetterC" parent="." instance=ExtResource("3_2d1aj")]
-position = Vector2(541, 208)
+[node name="LetterB" parent="." instance=ExtResource("3_2d1aj")]
+position = Vector2(509, 321)
 
 [editable path="Target"]
