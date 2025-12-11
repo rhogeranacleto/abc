@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_t2bd8"]
 script = ExtResource("5_b7duk")
-damage = 12
+damage = 1
 metadata/_custom_type_script = "uid://bgho0nn52h27q"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7oki"]
@@ -32,7 +32,6 @@ rect = Rect2(-33, -33, 66, 66)
 [node name="HitBox" parent="." instance=ExtResource("3_t4vbm")]
 collision_mask = 2
 effects = Array[ExtResource("4_b7duk")]([SubResource("Resource_t2bd8")])
-mode = "one_hit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_v7oki")
