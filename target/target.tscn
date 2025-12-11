@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bim8yrun5ak7u"]
+[gd_scene load_steps=10 format=3 uid="uid://bim8yrun5ak7u"]
 
 [ext_resource type="Script" uid="uid://cfme1l6fnhjgx" path="res://target/target.gd" id="1_e1yvt"]
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_t2jmu"]
@@ -6,6 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="3_5ebp1"]
 [ext_resource type="Shape2D" uid="uid://ceft5pjuax8ya" path="res://target/target_shape.tres" id="4_6nu6o"]
 [ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://components/hurtbox/hurt_box.tscn" id="4_uqips"]
+[ext_resource type="Script" uid="uid://3wtv26ldj4iu" path="res://effects/effect_res.gd" id="5_5m6mw"]
+[ext_resource type="Script" uid="uid://bgho0nn52h27q" path="res://effects/one_hit_damage_res.gd" id="6_n0ue5"]
+
+[sub_resource type="Resource" id="Resource_fash6"]
+script = ExtResource("6_n0ue5")
+damage = 20
+metadata/_custom_type_script = "uid://bgho0nn52h27q"
 
 [node name="Target" type="Node2D" groups=["target"]]
 script = ExtResource("1_e1yvt")
@@ -26,7 +33,7 @@ label_settings = ExtResource("1_t2jmu")
 
 [node name="HitBox" parent="." instance=ExtResource("3_5ebp1")]
 collision_mask = 1
-damage = 10.0
+effects = Array[ExtResource("5_5m6mw")]([SubResource("Resource_fash6")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(1, 1)
@@ -34,7 +41,7 @@ shape = ExtResource("4_6nu6o")
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health_bar", "agent", "legs") instance=ExtResource("4_uqips")]
 collision_layer = 2
-cooldown = 0.0
+cooldown = 0.2
 health_bar = NodePath("ProgressBar")
 agent = NodePath("..")
 legs = NodePath("../Legs")

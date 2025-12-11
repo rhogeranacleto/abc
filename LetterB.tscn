@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="4_j52fi"]
 [ext_resource type="Script" uid="uid://3wtv26ldj4iu" path="res://effects/effect_res.gd" id="5_dc8qm"]
 [ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://components/hurtbox/hurt_box.tscn" id="5_fgpmi"]
-[ext_resource type="Script" uid="uid://cik0s5iifa3jx" path="res://effects/slow_effect_res.gd" id="6_7wl1p"]
+[ext_resource type="Script" uid="uid://bgho0nn52h27q" path="res://effects/one_hit_damage_res.gd" id="6_dc8qm"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_7k17h"]
 var/nearest_target/name = &"nearest_target"
@@ -103,10 +103,10 @@ _data = {
 &"attack": SubResource("Animation_fgpmi")
 }
 
-[sub_resource type="Resource" id="Resource_2rwi7"]
-script = ExtResource("6_7wl1p")
-speed_modifier = 0.1
-metadata/_custom_type_script = "uid://cik0s5iifa3jx"
+[sub_resource type="Resource" id="Resource_7wl1p"]
+script = ExtResource("6_dc8qm")
+damage = 2
+metadata/_custom_type_script = "uid://bgho0nn52h27q"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dc8qm"]
 size = Vector2(10, 50)
@@ -161,7 +161,7 @@ offset_bottom = -32.0
 collision_mask = 2
 monitoring = false
 damage = 40.0
-effects = Array[ExtResource("5_dc8qm")]([SubResource("Resource_2rwi7")])
+effects = Array[ExtResource("5_dc8qm")]([SubResource("Resource_7wl1p")])
 mode = "one_hit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/HitBox"]
