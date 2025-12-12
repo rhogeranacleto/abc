@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d6fudgrjj3c6"]
+[gd_scene load_steps=6 format=3 uid="uid://d6fudgrjj3c6"]
 
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_pwraq"]
 [ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://components/hurtbox/hurt_box.tscn" id="2_hdrtw"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6xbx4"]
 size = Vector2(43, 53)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6xbx4"]
+radius = 162.77899
 
 [node name="ThrowBomb" type="Node2D"]
 
@@ -32,11 +35,16 @@ offset_right = 64.0
 offset_bottom = -31.0
 value = 100.0
 
-[node name="ThrowWeapon" type="Node2D" parent="."]
+[node name="ThrowWeapon" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
 script = ExtResource("3_6xbx4")
 
-[node name="Timer" type="Timer" parent="ThrowWeapon"]
-wait_time = 0.5
+[node name="Cooldown" type="Timer" parent="ThrowWeapon"]
 autostart = true
 
-[connection signal="timeout" from="ThrowWeapon/Timer" to="ThrowWeapon" method="_on_timer_timeout"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThrowWeapon"]
+shape = SubResource("CircleShape2D_6xbx4")
+
+[connection signal="timeout" from="ThrowWeapon/Cooldown" to="ThrowWeapon" method="_on_timer_timeout"]

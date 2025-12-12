@@ -1,31 +1,14 @@
 [gd_scene load_steps=8 format=3 uid="uid://bg5b4405jx1u8"]
 
 [ext_resource type="Texture2D" uid="uid://dummsau6f0b0h" path="res://grass.webp" id="1_wpsn8"]
-[ext_resource type="PackedScene" uid="uid://d6fudgrjj3c6" path="res://throw_bomb.tscn" id="3_2d1aj"]
+[ext_resource type="PackedScene" uid="uid://dv8kgrg5e610f" path="res://LetterA.tscn" id="3_2d1aj"]
 [ext_resource type="PackedScene" uid="uid://bim8yrun5ak7u" path="res://target/target.tscn" id="3_xn68f"]
 
 [sub_resource type="Curve2D" id="Curve2D_2d1aj"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 586, 451, 0, 0, 0, 0, 491, 481, 0, 0, 0, 0, 320, 483, 0, 0, 0, 0, 238, 403, 0, 0, 0, 0, 224, 312, 0, 0, 0, 0, 276, 242, 0, 0, 0, 0, 202, 156, 0, 0, 0, 0, 278, 80, 0, 0, 0, 0, 484, 41, 0, 0, 0, 0, 765, 65, 0, 0, 0, 0, 783, 136, 0, 0, 0, 0, 959, 250, 0, 0, 0, 0, 1040, 292, 0, 0, 0, 0, 1031, 415, 0, 0, 0, 0, 830, 413, 0, 0, 0, 0, 698, 554)
+"points": PackedVector2Array(0, 0, 0, 0, 586, 451, 0, 0, 0, 0, 491, 481, 0, 0, 0, 0, 320, 483, 0, 0, 0, 0, 238, 403, 0, 0, 0, 0, 224, 312, 0, 0, 0, 0, 276, 242, 0, 0, 0, 0, 202, 156, 0, 0, 0, 0, 704, 278, 0, 0, 0, 0, 484, 41, 0, 0, 0, 0, 765, 65, 0, 0, 0, 0, 783, 136, 0, 0, 0, 0, 959, 250, 0, 0, 0, 0, 1040, 292, 0, 0, 0, 0, 1031, 415, 0, 0, 0, 0, 830, 413, 0, 0, 0, 0, 698, 554)
 }
 point_count = 16
-
-[sub_resource type="Animation" id="Animation_2d1aj"]
-resource_name = "move"
-length = 10.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PathFollow2D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 10),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
 
 [sub_resource type="Animation" id="Animation_xn68f"]
 length = 0.001
@@ -40,6 +23,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_2d1aj"]
+resource_name = "move"
+length = 50.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 50),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0lb5u"]
@@ -58,23 +58,18 @@ texture = ExtResource("1_wpsn8")
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(1025, 303)
 
-[node name="ThrowBomb" parent="." instance=ExtResource("3_2d1aj")]
-position = Vector2(578, 316)
-
-[node name="ThrowWeapon" parent="ThrowBomb" index="2" node_paths=PackedStringArray("target")]
-target = NodePath("../../Path2D/PathFollow2D/Target")
-
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_2d1aj")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(586, 451)
 rotation = 2.8357139
+rotates = false
 
 [node name="Target" parent="Path2D/PathFollow2D" instance=ExtResource("3_xn68f")]
 
 [node name="Legs" parent="Path2D/PathFollow2D/Target" index="0"]
-speed = 100.0
+speed = 20.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D"]
 libraries = {
@@ -82,5 +77,7 @@ libraries = {
 }
 autoplay = "move"
 
-[editable path="ThrowBomb"]
+[node name="LetterA" parent="." instance=ExtResource("3_2d1aj")]
+position = Vector2(614, 333)
+
 [editable path="Path2D/PathFollow2D/Target"]

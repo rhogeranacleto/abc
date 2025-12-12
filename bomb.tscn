@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm5klfrdk250x"]
+
+[ext_resource type="Script" uid="uid://d1ewhyy2vxes4" path="res://bomb.gd" id="1_4fn8o"]
+[ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_573fp"]
+
+[node name="Bomb" type="Node2D"]
+script = ExtResource("1_4fn8o")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -31.0
+offset_top = -63.0
+offset_right = 39.0
+offset_bottom = 33.0
+pivot_offset = Vector2(26, 61)
+text = "💣"
+label_settings = ExtResource("1_573fp")
+horizontal_alignment = 1
+
+[connection signal="hit" from="." to="." method="_on_hit"]
