@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bg5b4405jx1u8"]
 
 [ext_resource type="Texture2D" uid="uid://dummsau6f0b0h" path="res://grass.webp" id="1_wpsn8"]
-[ext_resource type="PackedScene" uid="uid://dv8kgrg5e610f" path="res://LetterA.tscn" id="3_2d1aj"]
+[ext_resource type="PackedScene" uid="uid://dedgs5uk4g2db" path="res://laser_soldier.tscn" id="3_2d1aj"]
 [ext_resource type="PackedScene" uid="uid://bim8yrun5ak7u" path="res://target/target.tscn" id="3_xn68f"]
 
 [sub_resource type="Curve2D" id="Curve2D_2d1aj"]
@@ -77,7 +77,7 @@ libraries = {
 }
 autoplay = "move"
 
-[node name="LetterA" parent="." instance=ExtResource("3_2d1aj")]
-position = Vector2(614, 333)
+[node name="BaseSoldier" parent="." instance=ExtResource("3_2d1aj")]
+position = Vector2(610, 317)
 
 [editable path="Path2D/PathFollow2D/Target"]

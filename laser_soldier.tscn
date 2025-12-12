@@ -1,0 +1,107 @@
+[gd_scene load_steps=11 format=3 uid="uid://dedgs5uk4g2db"]
+
+[ext_resource type="PackedScene" uid="uid://ctkl077apgdmt" path="res://base_soldier.tscn" id="1_ytm24"]
+[ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="2_cpg5s"]
+[ext_resource type="Script" uid="uid://c7ynsnr6odvgx" path="res://laser_gun.gd" id="2_dwadg"]
+[ext_resource type="Script" uid="uid://3wtv26ldj4iu" path="res://effects/effect_res.gd" id="3_hyxt5"]
+[ext_resource type="Script" uid="uid://bgho0nn52h27q" path="res://effects/one_hit_damage_res.gd" id="4_dwadg"]
+
+[sub_resource type="Resource" id="Resource_sqvtg"]
+script = ExtResource("4_dwadg")
+damage = 50
+metadata/_custom_type_script = "uid://bgho0nn52h27q"
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ytm24"]
+b = Vector2(1000, 0)
+
+[sub_resource type="Animation" id="Animation_dwadg"]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitBox:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBox/ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sqvtg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitBox:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBox/ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dnubw"]
+_data = {
+&"RESET": SubResource("Animation_sqvtg"),
+&"hit": SubResource("Animation_dwadg")
+}
+
+[node name="LaserSoldier" instance=ExtResource("1_ytm24")]
+
+[node name="LaserGun" type="Node2D" parent="." index="2"]
+script = ExtResource("2_dwadg")
+
+[node name="HitBox" parent="LaserGun" index="0" instance=ExtResource("2_cpg5s")]
+collision_mask = 2
+monitoring = false
+effects = Array[ExtResource("3_hyxt5")]([SubResource("Resource_sqvtg")])
+
+[node name="ColorRect" type="ColorRect" parent="LaserGun/HitBox" index="0"]
+offset_top = -2.0
+offset_right = 1000.0
+offset_bottom = 2.0
+pivot_offset = Vector2(0, 2)
+color = Color(0.91227055, 4.7168137e-06, 6.738305e-07, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserGun/HitBox" index="1"]
+shape = SubResource("SegmentShape2D_ytm24")
+
+[node name="Cooldown" type="Timer" parent="LaserGun" index="1"]
+wait_time = 5.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaserGun" index="2"]
+libraries = {
+&"": SubResource("AnimationLibrary_dnubw")
+}
+
+[connection signal="timeout" from="LaserGun/Cooldown" to="LaserGun" method="_on_cooldown_timeout"]
