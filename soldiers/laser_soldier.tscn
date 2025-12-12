@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dedgs5uk4g2db"]
 
-[ext_resource type="PackedScene" uid="uid://ctkl077apgdmt" path="res://base_soldier.tscn" id="1_ytm24"]
+[ext_resource type="PackedScene" uid="uid://ctkl077apgdmt" path="res://soldiers/base_soldier.tscn" id="1_ytm24"]
 [ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="2_cpg5s"]
 [ext_resource type="Script" uid="uid://c7ynsnr6odvgx" path="res://laser_gun.gd" id="2_dwadg"]
 [ext_resource type="Script" uid="uid://3wtv26ldj4iu" path="res://effects/effect_res.gd" id="3_hyxt5"]

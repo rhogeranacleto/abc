@@ -1,8 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bg5b4405jx1u8"]
+[gd_scene load_steps=12 format=3 uid="uid://bg5b4405jx1u8"]
 
 [ext_resource type="Texture2D" uid="uid://dummsau6f0b0h" path="res://grass.webp" id="1_wpsn8"]
-[ext_resource type="PackedScene" uid="uid://dedgs5uk4g2db" path="res://laser_soldier.tscn" id="3_2d1aj"]
+[ext_resource type="PackedScene" uid="uid://chqxg2v5rt8a0" path="res://soldiers/flame_thrower.tscn" id="3_2d1aj"]
 [ext_resource type="PackedScene" uid="uid://bim8yrun5ak7u" path="res://target/target.tscn" id="3_xn68f"]
+[ext_resource type="PackedScene" uid="uid://dv8kgrg5e610f" path="res://soldiers/LetterA.tscn" id="4_bswyy"]
+[ext_resource type="PackedScene" uid="uid://5e7d1ismiiis" path="res://soldiers/LetterB.tscn" id="5_bayrd"]
+[ext_resource type="PackedScene" uid="uid://j81bd4hg1vx" path="res://soldiers/LetterC.tscn" id="6_8xn62"]
+[ext_resource type="PackedScene" uid="uid://d6fudgrjj3c6" path="res://soldiers/throw_bomb.tscn" id="7_rb8mk"]
 
 [sub_resource type="Curve2D" id="Curve2D_2d1aj"]
 _data = {
@@ -69,7 +73,11 @@ rotates = false
 [node name="Target" parent="Path2D/PathFollow2D" instance=ExtResource("3_xn68f")]
 
 [node name="Legs" parent="Path2D/PathFollow2D/Target" index="0"]
-speed = 20.0
+speed = 40.0
+
+[node name="HurtBox" parent="Path2D/PathFollow2D/Target" index="3"]
+max_health = 1000
+health = 1000
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D"]
 libraries = {
@@ -77,7 +85,19 @@ libraries = {
 }
 autoplay = "move"
 
-[node name="BaseSoldier" parent="." instance=ExtResource("3_2d1aj")]
-position = Vector2(610, 317)
+[node name="FlameThrower" parent="." instance=ExtResource("3_2d1aj")]
+position = Vector2(645, 339)
+
+[node name="LetterA" parent="." instance=ExtResource("4_bswyy")]
+position = Vector2(118, 149)
+
+[node name="LetterB" parent="." instance=ExtResource("5_bayrd")]
+position = Vector2(295, 524)
+
+[node name="LetterC" parent="." instance=ExtResource("6_8xn62")]
+position = Vector2(951, 350)
+
+[node name="ThrowBomb" parent="." instance=ExtResource("7_rb8mk")]
+position = Vector2(801, 77)
 
 [editable path="Path2D/PathFollow2D/Target"]

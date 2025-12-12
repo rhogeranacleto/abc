@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://d6fudgrjj3c6"]
 
-[ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_pwraq"]
-[ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://components/hurtbox/hurt_box.tscn" id="2_hdrtw"]
-[ext_resource type="Script" uid="uid://coxk1ybfd71aq" path="res://components/weapons/throw_gun/throw_weapon.gd" id="3_6xbx4"]
+[ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_jqgjp"]
+[ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://components/hurtbox/hurt_box.tscn" id="2_cyq88"]
+[ext_resource type="Script" uid="uid://coxk1ybfd71aq" path="res://components/weapons/throw_gun/throw_weapon.gd" id="3_8udjb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6xbx4"]
 size = Vector2(43, 53)
@@ -18,10 +18,10 @@ offset_top = -48.0
 offset_right = 26.0
 offset_bottom = 48.0
 text = "D"
-label_settings = ExtResource("1_pwraq")
+label_settings = ExtResource("1_jqgjp")
 horizontal_alignment = 1
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("2_hdrtw")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("2_cyq88")]
 health_bar = NodePath("ProgressBar")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
@@ -39,7 +39,7 @@ value = 100.0
 collision_layer = 0
 collision_mask = 2
 monitorable = false
-script = ExtResource("3_6xbx4")
+script = ExtResource("3_8udjb")
 
 [node name="Cooldown" type="Timer" parent="ThrowWeapon"]
 autostart = true
