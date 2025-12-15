@@ -1,56 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://bg5b4405jx1u8"]
+[gd_scene load_steps=8 format=3 uid="uid://bg5b4405jx1u8"]
 
 [ext_resource type="Texture2D" uid="uid://dummsau6f0b0h" path="res://grass.webp" id="1_wpsn8"]
-[ext_resource type="PackedScene" uid="uid://chqxg2v5rt8a0" path="res://soldiers/flame_thrower.tscn" id="3_2d1aj"]
-[ext_resource type="PackedScene" uid="uid://bim8yrun5ak7u" path="res://target/target.tscn" id="3_xn68f"]
-[ext_resource type="PackedScene" uid="uid://dv8kgrg5e610f" path="res://soldiers/LetterA.tscn" id="4_bswyy"]
-[ext_resource type="PackedScene" uid="uid://5e7d1ismiiis" path="res://soldiers/LetterB.tscn" id="5_bayrd"]
-[ext_resource type="PackedScene" uid="uid://j81bd4hg1vx" path="res://soldiers/LetterC.tscn" id="6_8xn62"]
-[ext_resource type="PackedScene" uid="uid://d6fudgrjj3c6" path="res://soldiers/throw_bomb.tscn" id="7_rb8mk"]
+[ext_resource type="PackedScene" uid="uid://br45xvw6b2lno" path="res://target_follow.tscn" id="2_2d1aj"]
+[ext_resource type="PackedScene" uid="uid://tvw6cc1s25s6" path="res://components/weapons/laser_gun/laser_gun.tscn" id="4_0lb5u"]
+[ext_resource type="PackedScene" uid="uid://bj87lcqs0x8lr" path="res://components/weapons/sword/sword_old.tscn" id="4_xn68f"]
+[ext_resource type="PackedScene" uid="uid://cifls18qq3qvy" path="res://components/weapons/area_damage/area_damage.tscn" id="6_bswyy"]
+[ext_resource type="PackedScene" uid="uid://dx8duy0p58vcx" path="res://components/weapons/shooting_gun/shooting_gun.tscn" id="6_vkvqs"]
 
 [sub_resource type="Curve2D" id="Curve2D_2d1aj"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 586, 451, 0, 0, 0, 0, 491, 481, 0, 0, 0, 0, 320, 483, 0, 0, 0, 0, 238, 403, 0, 0, 0, 0, 224, 312, 0, 0, 0, 0, 276, 242, 0, 0, 0, 0, 202, 156, 0, 0, 0, 0, 704, 278, 0, 0, 0, 0, 484, 41, 0, 0, 0, 0, 765, 65, 0, 0, 0, 0, 783, 136, 0, 0, 0, 0, 959, 250, 0, 0, 0, 0, 1040, 292, 0, 0, 0, 0, 1031, 415, 0, 0, 0, 0, 830, 413, 0, 0, 0, 0, 698, 554)
+"points": PackedVector2Array(0, 0, 0, 0, 586, 451, 0, 0, 0, 0, 491, 481, 0, 0, 0, 0, 320, 483, 0, 0, 0, 0, 238, 403, 0, 0, 0, 0, 224, 312, 0, 0, 0, 0, 276, 242, 0, 0, 0, 0, 202, 156, 0, 0, 0, 0, 704, 278, 0, 0, 0, 0, 484, 41, 0, 0, 0, 0, 765, 65, 0, 0, 0, 0, 783, 136, 0, 0, 0, 0, 959, 250, 0, 0, 0, 0, 1040, 292, 0, 0, 0, 0, 1031, 415, 0, 0, 0, 0, 830, 413, 0, 0, 0, 0, 698, 554, 0, 0, 0, 0, 586, 451)
 }
-point_count = 16
-
-[sub_resource type="Animation" id="Animation_xn68f"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PathFollow2D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_2d1aj"]
-resource_name = "move"
-length = 50.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PathFollow2D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 50),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0lb5u"]
-_data = {
-&"RESET": SubResource("Animation_xn68f"),
-&"move": SubResource("Animation_2d1aj")
-}
+point_count = 17
 
 [node name="TestGame" type="Node2D"]
 
@@ -65,39 +26,41 @@ position = Vector2(1025, 303)
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_2d1aj")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+[node name="PathFollow2D" parent="Path2D" instance=ExtResource("2_2d1aj")]
 position = Vector2(586, 451)
-rotation = 2.8357139
-rotates = false
 
-[node name="Target" parent="Path2D/PathFollow2D" instance=ExtResource("3_xn68f")]
+[node name="PathFollow2D2" parent="Path2D" instance=ExtResource("2_2d1aj")]
+position = Vector2(490.0912, 481.09985)
+progress = 100.39648
 
-[node name="Legs" parent="Path2D/PathFollow2D/Target" index="0"]
-speed = 40.0
+[node name="PathFollow2D3" parent="Path2D" instance=ExtResource("2_2d1aj")]
+position = Vector2(226.40689, 161.93156)
+progress = 703.0445
 
-[node name="HurtBox" parent="Path2D/PathFollow2D/Target" index="3"]
-max_health = 1000
-health = 1000
+[node name="PathFollow2D4" parent="Path2D" instance=ExtResource("2_2d1aj")]
+position = Vector2(636.26733, 261.53912)
+progress = 1124.8174
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_0lb5u")
-}
-autoplay = "move"
+[node name="ShootingGun" parent="." instance=ExtResource("6_vkvqs")]
+process_mode = 4
+visible = false
+position = Vector2(815, 240)
+cooldown = 0.4
+collision_mask = 2
 
-[node name="FlameThrower" parent="." instance=ExtResource("3_2d1aj")]
-position = Vector2(645, 339)
+[node name="Sword" parent="." instance=ExtResource("4_xn68f")]
+process_mode = 4
+visible = false
+position = Vector2(225, 399)
+collision_mask = 2
 
-[node name="LetterA" parent="." instance=ExtResource("4_bswyy")]
-position = Vector2(118, 149)
+[node name="LaserGun" parent="." instance=ExtResource("4_0lb5u")]
+process_mode = 4
+visible = false
+position = Vector2(136, 218)
+collision_mask = 2
 
-[node name="LetterB" parent="." instance=ExtResource("5_bayrd")]
-position = Vector2(295, 524)
-
-[node name="LetterC" parent="." instance=ExtResource("6_8xn62")]
-position = Vector2(951, 350)
-
-[node name="ThrowBomb" parent="." instance=ExtResource("7_rb8mk")]
-position = Vector2(801, 77)
-
-[editable path="Path2D/PathFollow2D/Target"]
+[node name="AreaDamage" parent="." instance=ExtResource("6_bswyy")]
+position = Vector2(514, 265)
+collision_mask = 2
+cooldown = 0.2

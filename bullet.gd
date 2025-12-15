@@ -1,11 +1,10 @@
 extends Node2D
 
-@export var direction: Vector2
-@export var speed = 200
+
+@export var speed = 2000
 
 func _process(delta: float) -> void:
-	global_position += direction * speed * delta
-	pass
+	global_position += transform.x * speed * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()

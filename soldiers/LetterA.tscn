@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cn2nvmsl6250d" path="res://ai/tasks/shoot.gd" id="3_gm3ap"]
 [ext_resource type="Script" uid="uid://beadd80bw35lj" path="res://ai/tasks/is_target_in_area.gd" id="3_yojyf"]
 [ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://components/hurtbox/hurt_box.tscn" id="5_5rj57"]
-[ext_resource type="PackedScene" uid="uid://dhj2iutrs6in8" path="res://components/weapons/shooting_gun/shooting_gun.tscn" id="6_hjiw3"]
+[ext_resource type="PackedScene" uid="uid://dhj2iutrs6in8" path="res://components/weapons/shooting_gun_old/shooting_gun.tscn" id="6_hjiw3"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_7k17h"]
 var/nearest_target/name = &"nearest_target"
@@ -50,17 +50,15 @@ label_settings = ExtResource("1_7k17h")
 behavior_tree = SubResource("BehaviorTree_u57or")
 blackboard_plan = SubResource("BlackboardPlan_gm3ap")
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health_bar", "agent") instance=ExtResource("5_5rj57")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("5_5rj57")]
 collision_layer = 1
 health_bar = NodePath("../ProgressBar")
-agent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_5rj57")
 
 [node name="Gun" parent="." instance=ExtResource("6_hjiw3")]
-scale = Vector2(0.38, 0.38)
 collision_mask = 2
 cooldown = 2.0
 
