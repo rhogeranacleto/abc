@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c03aqukr6wrum"]
+
+[ext_resource type="Script" uid="uid://bth3dnbrj6626" path="res://components/ranger_activator/range_activator.gd" id="1_vgiy0"]
+
+[node name="RangeActivator" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+script = ExtResource("1_vgiy0")
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

@@ -1,0 +1,74 @@
+[gd_scene load_steps=14 format=3 uid="uid://dv8kgrg5e610f"]
+
+[ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_7k17h"]
+[ext_resource type="Script" uid="uid://cn2nvmsl6250d" path="res://ai/tasks/shoot.gd" id="3_gm3ap"]
+[ext_resource type="Script" uid="uid://beadd80bw35lj" path="res://ai/tasks/is_target_in_area.gd" id="3_yojyf"]
+[ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://components/hurtbox/hurt_box.tscn" id="5_5rj57"]
+[ext_resource type="PackedScene" uid="uid://dhj2iutrs6in8" path="res://components/weapons/shooting_gun_old/shooting_gun.tscn" id="6_hjiw3"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_7k17h"]
+var/nearest_target/name = &"nearest_target"
+var/nearest_target/type = 22
+var/nearest_target/value = NodePath("")
+var/nearest_target/hint = 0
+var/nearest_target/hint_string = ""
+
+[sub_resource type="BTCondition" id="BTCondition_akvt2"]
+script = ExtResource("3_yojyf")
+area_range = NodePath("Gun")
+
+[sub_resource type="BTAction" id="BTAction_yojyf"]
+script = ExtResource("3_gm3ap")
+gun = NodePath("Gun")
+
+[sub_resource type="BTSequence" id="BTSequence_u57or"]
+children = [SubResource("BTCondition_akvt2"), SubResource("BTAction_yojyf")]
+
+[sub_resource type="BehaviorTree" id="BehaviorTree_u57or"]
+blackboard_plan = SubResource("BlackboardPlan_7k17h")
+root_task = SubResource("BTSequence_u57or")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_gm3ap"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rj57"]
+size = Vector2(48, 53)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4fvt3"]
+radius = 300.0
+
+[node name="LetterA" type="Node2D" groups=["soldier"]]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -23.0
+offset_top = -53.0
+offset_right = 23.0
+offset_bottom = 43.0
+text = "A"
+label_settings = ExtResource("1_7k17h")
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = SubResource("BehaviorTree_u57or")
+blackboard_plan = SubResource("BlackboardPlan_gm3ap")
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("5_5rj57")]
+collision_layer = 1
+health_bar = NodePath("../ProgressBar")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_5rj57")
+
+[node name="Gun" parent="." instance=ExtResource("6_hjiw3")]
+collision_mask = 2
+cooldown = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gun"]
+scale = Vector2(2.631579, 2.631579)
+shape = SubResource("CircleShape2D_4fvt3")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -59.0
+offset_top = -67.0
+offset_right = 59.0
+offset_bottom = -40.0
+value = 100.0

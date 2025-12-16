@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="abc"
-run/main_scene="uid://qh82rqe3tbhj"
+run/main_scene="uid://bg5b4405jx1u8"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,3 +19,14 @@ config/icon="res://icon.svg"
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[global_group]
+
+target=""
+soldier=""
+
+[layer_names]
+
+2d_physics/layer_1="soldier"
+2d_physics/layer_2="target"
+2d_physics/layer_3="bullet"

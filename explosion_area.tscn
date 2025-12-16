@@ -1,0 +1,92 @@
+[gd_scene load_steps=11 format=3 uid="uid://3xrf5mjjc1ky"]
+
+[ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="1_d6w2l"]
+[ext_resource type="Texture2D" uid="uid://dxfyhld4qs6qp" path="res://red-circle.webp" id="1_g2b2c"]
+[ext_resource type="Script" uid="uid://3wtv26ldj4iu" path="res://effects/effect_res.gd" id="2_khqqm"]
+[ext_resource type="Script" uid="uid://bgho0nn52h27q" path="res://effects/one_hit_damage_res.gd" id="3_g2b2c"]
+
+[sub_resource type="GDScript" id="GDScript_g2b2c"]
+script/source = "extends Node2D
+
+func clean():
+	owner.queue_free()
+"
+
+[sub_resource type="Resource" id="Resource_uh4ss"]
+script = ExtResource("3_g2b2c")
+damage = 10
+metadata/_custom_type_script = "uid://bgho0nn52h27q"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t86v5"]
+radius = 143.17122
+
+[sub_resource type="Animation" id="Animation_uh4ss"]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RedCircle:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"clean"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_g2b2c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RedCircle:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g4prb"]
+_data = {
+&"RESET": SubResource("Animation_g2b2c"),
+&"hit": SubResource("Animation_uh4ss")
+}
+
+[node name="ExplosionArea" type="Node2D"]
+script = SubResource("GDScript_g2b2c")
+
+[node name="RedCircle" type="Sprite2D" parent="."]
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("1_g2b2c")
+
+[node name="HitBox" parent="." instance=ExtResource("1_d6w2l")]
+collision_mask = 2
+effects = Array[ExtResource("2_khqqm")]([SubResource("Resource_uh4ss")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_t86v5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g4prb")
+}
+autoplay = "hit"

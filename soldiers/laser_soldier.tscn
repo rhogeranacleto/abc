@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dedgs5uk4g2db"]
+
+[ext_resource type="PackedScene" uid="uid://ctkl077apgdmt" path="res://soldiers/base_soldier.tscn" id="1_ytm24"]
+[ext_resource type="PackedScene" uid="uid://tvw6cc1s25s6" path="res://components/weapons/laser_gun/laser_gun.tscn" id="2_wf56j"]
+
+[node name="LaserSoldier" instance=ExtResource("1_ytm24")]
+
+[node name="LaserGun" parent="." index="2" instance=ExtResource("2_wf56j")]

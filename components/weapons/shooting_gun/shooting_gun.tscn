@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx8duy0p58vcx"]
+
+[ext_resource type="PackedScene" uid="uid://c03aqukr6wrum" path="res://components/ranger_activator/range_activator.tscn" id="1_5heds"]
+[ext_resource type="Script" uid="uid://hgl6i48gkqs5" path="res://components/weapons/shooting_gun/shooting_gun.gd" id="1_j2xr4"]
+[ext_resource type="Texture2D" uid="uid://doowry3rmkwre" path="res://components/weapons/shooting_gun_old/gun.png" id="2_j2xr4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_auhac"]
+radius = 300.0
+
+[node name="ShootingGun" type="Node2D"]
+script = ExtResource("1_j2xr4")
+
+[node name="RangeActivator" parent="." instance=ExtResource("1_5heds")]
+cooldown = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeActivator"]
+shape = SubResource("CircleShape2D_auhac")
+
+[node name="Gun" type="Sprite2D" parent="."]
+position = Vector2(39, 0)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("2_j2xr4")
+
+[node name="Marker2D" type="Marker2D" parent="Gun"]
+position = Vector2(88.28829, -14.414414)
+scale = Vector2(1.8018018, 1.8018018)
+
+[connection signal="activate" from="RangeActivator" to="." method="_on_range_activator_activate"]

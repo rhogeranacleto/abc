@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlsla2s21xgs5"]
+
+[ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="1_5yxwy"]
+[ext_resource type="Script" uid="uid://di4a57hbiv2qh" path="res://components/weapons/projectiles/short_range_bullet.gd" id="1_l0xnq"]
+[ext_resource type="Texture2D" uid="uid://c0mc1peomcbkq" path="res://emojis.png" id="2_l0xnq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sjewr"]
+radius = 19.235384
+
+[node name="ShortRangeBullet" type="Node2D"]
+script = ExtResource("1_l0xnq")
+
+[node name="HitBox" parent="." instance=ExtResource("1_5yxwy")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_sjewr")
+
+[node name="Sprite2D" type="Sprite2D" parent="HitBox"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_l0xnq")
+region_enabled = true
+region_rect = Rect2(2051.5146, 2690.729, 121.48169, 122.74634)
+
+[node name="Label" type="Label" parent="HitBox"]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "T"

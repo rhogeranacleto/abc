@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctkl077apgdmt"]
+
+[ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_3jjpq"]
+[ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://components/hurtbox/hurt_box.tscn" id="2_wdsra"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ovfwq"]
+size = Vector2(44, 53)
+
+[node name="BaseSoldier" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -22.0
+offset_top = -49.0
+offset_right = 22.0
+offset_bottom = 47.0
+text = "X"
+label_settings = ExtResource("1_3jjpq")
+horizontal_alignment = 1
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("2_wdsra")]
+health_bar = NodePath("ProgressBar")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_ovfwq")
+
+[node name="ProgressBar" type="ProgressBar" parent="HurtBox"]
+offset_left = -65.0
+offset_top = -60.0
+offset_right = 66.0
+offset_bottom = -33.0
+value = 100.0
