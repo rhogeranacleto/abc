@@ -8,10 +8,10 @@ extends Node2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var range_activator : RangeActivator = $RangeActivator
 
-func _ready() -> void:
-	hit_box.collision_mask = collision_mask
-	range_activator.collision_mask = collision_mask
-	range_activator.cooldown = cooldown
+#func _ready() -> void:
+	#hit_box.collision_mask = collision_mask
+	#range_activator.collision_mask = collision_mask
+	#range_activator.cooldown = cooldown
 
 func _process(_delta: float) -> void:
 	var targets = range_activator.get_overlapping_areas()

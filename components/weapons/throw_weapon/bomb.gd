@@ -10,3 +10,4 @@ func _on_hit() -> void:
 	add_child(explosion_area)
 	
 	explosion_area.owner = owner
+	$Label.visible = false

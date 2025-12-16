@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://n65jcydwh4sv"]
+
+[ext_resource type="Script" uid="uid://coxk1ybfd71aq" path="res://components/weapons/throw_weapon/throw_weapon.gd" id="1_gmldl"]
+[ext_resource type="PackedScene" uid="uid://bm5klfrdk250x" path="res://components/weapons/throw_weapon/bomb.tscn" id="2_os7ea"]
+[ext_resource type="PackedScene" uid="uid://c03aqukr6wrum" path="res://components/ranger_activator/range_activator.tscn" id="2_pycil"]
+
+[sub_resource type="Curve" id="Curve_c7cla"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.2), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6xbx4"]
+radius = 162.77899
+
+[node name="ThrowWeapon" type="Node2D"]
+script = ExtResource("1_gmldl")
+PROJECTILE = ExtResource("2_os7ea")
+curve = SubResource("Curve_c7cla")
+
+[node name="RangeActivator" parent="." instance=ExtResource("2_pycil")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeActivator"]
+shape = SubResource("CircleShape2D_6xbx4")
+
+[connection signal="activate" from="RangeActivator" to="." method="_on_range_activator_activate"]

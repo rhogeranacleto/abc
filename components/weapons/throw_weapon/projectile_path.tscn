@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dnn3pmet6y2tu"]
 
-[ext_resource type="Script" uid="uid://c6aaj6hgc8ibb" path="res://projectile_path.gd" id="1_ioqka"]
-[ext_resource type="PackedScene" uid="uid://bm5klfrdk250x" path="res://bomb.tscn" id="2_wugd0"]
+[ext_resource type="Script" uid="uid://c6aaj6hgc8ibb" path="res://components/weapons/throw_weapon/projectile_path.gd" id="1_ioqka"]
+[ext_resource type="PackedScene" uid="uid://bm5klfrdk250x" path="res://components/weapons/throw_weapon/bomb.tscn" id="2_wugd0"]
 
 [sub_resource type="Curve2D" id="Curve2D_hdrtw"]
 resource_local_to_scene = true

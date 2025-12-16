@@ -5,11 +5,11 @@ extends Node2D
 @export var cooldown = 1.0
 
 func _ready() -> void:
-	$HitBox.collision_mask = collision_mask
-	$RangeActivator.collision_mask = collision_mask
+	#$HitBox.collision_mask = collision_mask
+	#$RangeActivator.collision_mask = collision_mask
 	$HitBox/CollisionShape2D.shape = shape
 	$RangeActivator/CollisionShape2D.shape = shape
-	$RangeActivator.cooldown = cooldown
+	#$RangeActivator.cooldown = cooldown
 
 
 func _on_range_activator_activate(sorted_targets: Array[Area2D]) -> void:

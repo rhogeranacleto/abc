@@ -86,7 +86,6 @@ _data = {
 script = ExtResource("1_v2oyg")
 
 [node name="RangeActivator" parent="." instance=ExtResource("4_o53ic")]
-cooldown = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RangeActivator"]
 shape = SubResource("CircleShape2D_v2oyg")
