@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bg5b4405jx1u8"]
+[gd_scene load_steps=12 format=3 uid="uid://bg5b4405jx1u8"]
 
 [ext_resource type="Texture2D" uid="uid://dummsau6f0b0h" path="res://grass.webp" id="1_wpsn8"]
 [ext_resource type="PackedScene" uid="uid://br45xvw6b2lno" path="res://target_follow.tscn" id="2_2d1aj"]
 [ext_resource type="PackedScene" uid="uid://tvw6cc1s25s6" path="res://components/weapons/laser_gun/laser_gun.tscn" id="4_0lb5u"]
+[ext_resource type="PackedScene" uid="uid://dlsla2s21xgs5" path="res://components/weapons/projectiles/short_range_bullet.tscn" id="4_bswyy"]
 [ext_resource type="PackedScene" uid="uid://bj87lcqs0x8lr" path="res://components/weapons/sword/sword_old.tscn" id="4_xn68f"]
+[ext_resource type="Script" uid="uid://3wtv26ldj4iu" path="res://effects/effect_res.gd" id="5_8xn62"]
 [ext_resource type="PackedScene" uid="uid://cifls18qq3qvy" path="res://components/weapons/area_damage/area_damage.tscn" id="6_bswyy"]
+[ext_resource type="Script" uid="uid://bgho0nn52h27q" path="res://effects/one_hit_damage_res.gd" id="6_rb8mk"]
 [ext_resource type="PackedScene" uid="uid://dx8duy0p58vcx" path="res://components/weapons/shooting_gun/shooting_gun.tscn" id="6_vkvqs"]
 
 [sub_resource type="Curve2D" id="Curve2D_2d1aj"]
@@ -12,6 +15,11 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 586, 451, 0, 0, 0, 0, 491, 481, 0, 0, 0, 0, 320, 483, 0, 0, 0, 0, 238, 403, 0, 0, 0, 0, 224, 312, 0, 0, 0, 0, 276, 242, 0, 0, 0, 0, 202, 156, 0, 0, 0, 0, 704, 278, 0, 0, 0, 0, 484, 41, 0, 0, 0, 0, 765, 65, 0, 0, 0, 0, 783, 136, 0, 0, 0, 0, 959, 250, 0, 0, 0, 0, 1040, 292, 0, 0, 0, 0, 1031, 415, 0, 0, 0, 0, 830, 413, 0, 0, 0, 0, 698, 554, 0, 0, 0, 0, 586, 451)
 }
 point_count = 17
+
+[sub_resource type="Resource" id="Resource_8xn62"]
+script = ExtResource("6_rb8mk")
+damage = 50
+metadata/_custom_type_script = "uid://bgho0nn52h27q"
 
 [node name="TestGame" type="Node2D"]
 
@@ -41,26 +49,25 @@ progress = 703.0445
 position = Vector2(636.26733, 261.53912)
 progress = 1124.8174
 
-[node name="ShootingGun" parent="." instance=ExtResource("6_vkvqs")]
+[node name="weapons" type="Node2D" parent="."]
 process_mode = 4
 visible = false
-position = Vector2(815, 240)
-cooldown = 0.4
-collision_mask = 2
 
-[node name="Sword" parent="." instance=ExtResource("4_xn68f")]
-process_mode = 4
-visible = false
+[node name="Sword" parent="weapons" instance=ExtResource("4_xn68f")]
 position = Vector2(225, 399)
 collision_mask = 2
 
-[node name="LaserGun" parent="." instance=ExtResource("4_0lb5u")]
-process_mode = 4
-visible = false
+[node name="LaserGun" parent="weapons" instance=ExtResource("4_0lb5u")]
 position = Vector2(136, 218)
 collision_mask = 2
 
-[node name="AreaDamage" parent="." instance=ExtResource("6_bswyy")]
+[node name="AreaDamage" parent="weapons" instance=ExtResource("6_bswyy")]
 position = Vector2(514, 265)
 collision_mask = 2
 cooldown = 0.2
+
+[node name="ShootingGun" parent="." instance=ExtResource("6_vkvqs")]
+position = Vector2(32, 54)
+BULLET = ExtResource("4_bswyy")
+effects = Array[ExtResource("5_8xn62")]([SubResource("Resource_8xn62")])
+collision_mask = 2

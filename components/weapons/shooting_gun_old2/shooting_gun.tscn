@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c03aqukr6wrum" path="res://components/ranger_activator/range_activator.tscn" id="1_d0cu8"]
 [ext_resource type="Script" uid="uid://6opppsya4082" path="res://components/weapons/shooting_gun_old2/shooting_gun.gd" id="2_pd86q"]
-[ext_resource type="PackedScene" uid="uid://ds16y5s0r4nw8" path="res://bullet.tscn" id="3_j21sv"]
+[ext_resource type="PackedScene" uid="uid://ds16y5s0r4nw8" path="res://components/weapons/projectiles/continuous_bullet.tscn" id="3_j21sv"]
 [ext_resource type="Texture2D" uid="uid://doowry3rmkwre" path="res://components/weapons/shooting_gun_old/gun.png" id="3_pd86q"]
 
 [node name="ShootingGun" instance=ExtResource("1_d0cu8")]

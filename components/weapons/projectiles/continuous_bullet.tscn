@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ds16y5s0r4nw8"]
+[gd_scene load_steps=9 format=3 uid="uid://ds16y5s0r4nw8"]
 
-[ext_resource type="Script" uid="uid://c3g2iffx58jmp" path="res://bullet.gd" id="1_v7oki"]
+[ext_resource type="Script" uid="uid://c3g2iffx58jmp" path="res://components/weapons/projectiles/continuous_bullet.gd" id="1_v7oki"]
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="2_v8qja"]
 [ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="3_t4vbm"]
 [ext_resource type="Script" uid="uid://3wtv26ldj4iu" path="res://effects/effect_res.gd" id="4_b7duk"]
 [ext_resource type="Script" uid="uid://bgho0nn52h27q" path="res://effects/one_hit_damage_res.gd" id="5_b7duk"]
+[ext_resource type="Texture2D" uid="uid://c0mc1peomcbkq" path="res://emojis.png" id="6_wi5sc"]
 
 [sub_resource type="Resource" id="Resource_t2bd8"]
 script = ExtResource("5_b7duk")
@@ -18,14 +19,6 @@ radius = 32.0
 scale = Vector2(0.32, 0.32)
 script = ExtResource("1_v7oki")
 
-[node name="Sprite" type="Label" parent="."]
-offset_left = -35.0
-offset_top = -56.0
-offset_right = 35.0
-offset_bottom = 40.0
-text = "🥎"
-label_settings = ExtResource("2_v8qja")
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-33, -33, 66, 66)
 
@@ -35,6 +28,21 @@ effects = Array[ExtResource("4_b7duk")]([SubResource("Resource_t2bd8")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_v7oki")
+
+[node name="Sprite" type="Label" parent="HitBox"]
+visible = false
+offset_left = -35.0
+offset_top = -56.0
+offset_right = 35.0
+offset_bottom = 40.0
+text = "🥎"
+label_settings = ExtResource("2_v8qja")
+
+[node name="Sprite2D" type="Sprite2D" parent="HitBox"]
+scale = Vector2(0.53, 0.53)
+texture = ExtResource("6_wi5sc")
+region_enabled = true
+region_rect = Rect2(1283.5042, 2819.774, 120.791504, 121.04297)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="hitted" from="HitBox" to="." method="_on_hit_box_hitted"]
