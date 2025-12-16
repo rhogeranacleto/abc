@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bg5b4405jx1u8"]
+[gd_scene load_steps=12 format=3 uid="uid://bg5b4405jx1u8"]
 
 [ext_resource type="Texture2D" uid="uid://dummsau6f0b0h" path="res://grass.webp" id="1_wpsn8"]
 [ext_resource type="PackedScene" uid="uid://br45xvw6b2lno" path="res://target_follow.tscn" id="2_2d1aj"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cifls18qq3qvy" path="res://components/weapons/area_damage/area_damage.tscn" id="6_bswyy"]
 [ext_resource type="Script" uid="uid://bgho0nn52h27q" path="res://effects/one_hit_damage_res.gd" id="6_rb8mk"]
 [ext_resource type="PackedScene" uid="uid://dx8duy0p58vcx" path="res://components/weapons/shooting_gun/shooting_gun.tscn" id="6_vkvqs"]
-[ext_resource type="PackedScene" uid="uid://n65jcydwh4sv" path="res://components/weapons/throw_weapon/throw_weapon.tscn" id="10_rb8mk"]
 
 [sub_resource type="Curve2D" id="Curve2D_2d1aj"]
 _data = {
@@ -50,13 +49,13 @@ progress = 703.0445
 position = Vector2(636.26733, 261.53912)
 progress = 1124.8174
 
+[node name="Sword" parent="." instance=ExtResource("4_xn68f")]
+position = Vector2(225, 399)
+collision_mask = 2
+
 [node name="weapons" type="Node2D" parent="."]
 process_mode = 4
 visible = false
-
-[node name="Sword" parent="weapons" instance=ExtResource("4_xn68f")]
-position = Vector2(225, 399)
-collision_mask = 2
 
 [node name="LaserGun" parent="weapons" instance=ExtResource("4_0lb5u")]
 position = Vector2(136, 218)
@@ -71,8 +70,4 @@ cooldown = 0.2
 position = Vector2(32, 54)
 BULLET = ExtResource("4_bswyy")
 effects = Array[ExtResource("5_8xn62")]([SubResource("Resource_8xn62")])
-collision_mask = 2
-
-[node name="ThrowWeapon" parent="." instance=ExtResource("10_rb8mk")]
-position = Vector2(304, 476)
 collision_mask = 2

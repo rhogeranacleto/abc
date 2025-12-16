@@ -2,7 +2,7 @@ extends Node2D
 
 @export_flags_2d_physics var collision_mask : int
 @export var projectile_range : float = 500.0
-@export var effects : Array[Effect]
+@export var effects : Array[EffectOld]
 @export var count = 7
 
 @onready var hit_box : Area2D = $HitBox

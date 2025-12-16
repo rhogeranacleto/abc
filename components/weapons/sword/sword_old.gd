@@ -13,5 +13,5 @@ func _ready() -> void:
 	#range_activator.cooldown = cooldown
 
 
-func _on_range_activator_activate(sorted_targets: Array[Area2D]) -> void:
+func _on_range_activator_activate(sorted_targets: Array[Node2D]) -> void:
 	animation_player.play("attack")

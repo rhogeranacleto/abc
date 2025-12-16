@@ -9,3 +9,4 @@ monitorable = false
 script = ExtResource("1_ycddr")
 
 [connection signal="area_entered" from="." to="." method="area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_hit_box_body_entered"]

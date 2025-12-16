@@ -3,7 +3,7 @@ extends Node2D
 @export var distance_range = 300.0
 @export var cooldown = 1.0
 @export var BULLET : PackedScene
-@export var effects : Array[Effect]
+@export var effects : Array[EffectOld]
 @export_flags_2d_physics var collision_mask : int
 
 
