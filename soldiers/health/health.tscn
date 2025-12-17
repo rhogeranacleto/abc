@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bi6nfdun4sbuk"]
 
-[ext_resource type="Script" uid="uid://brg8ag438g6ov" path="res://soldiers/health.gd" id="1_iu7cv"]
+[ext_resource type="Script" uid="uid://brg8ag438g6ov" path="res://soldiers/health/health.gd" id="1_iu7cv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8vsm4"]
 
@@ -21,10 +21,8 @@ ProgressBar/styles/background = SubResource("StyleBoxEmpty_iu7cv")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_b4yis")
 
 [node name="Health" type="ProgressBar"]
-offset_left = -50.0
-offset_top = -5.0
-offset_right = 50.0
-offset_bottom = 5.0
+offset_right = 100.0
+offset_bottom = 10.0
 pivot_offset = Vector2(50, 5)
 theme = SubResource("Theme_iu7cv")
 value = 100.0

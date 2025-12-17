@@ -3,7 +3,7 @@
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_bw80d"]
 [ext_resource type="Script" uid="uid://bcxgf8p0lwgb4" path="res://soldiers/soldier.gd" id="1_g7gc3"]
 [ext_resource type="PackedScene" uid="uid://2dd7cc2lcdl6" path="res://components/effect_receiver/effect_receiver.tscn" id="2_5owwq"]
-[ext_resource type="PackedScene" uid="uid://bi6nfdun4sbuk" path="res://soldiers/health.tscn" id="3_mwhw5"]
+[ext_resource type="PackedScene" uid="uid://bi6nfdun4sbuk" path="res://soldiers/health/health.tscn" id="3_mwhw5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bw80d"]
 size = Vector2(50, 60)
@@ -28,7 +28,9 @@ shape = SubResource("RectangleShape2D_bw80d")
 [node name="EffectReceiver" parent="." instance=ExtResource("2_5owwq")]
 
 [node name="Health" parent="." instance=ExtResource("3_mwhw5")]
-offset_top = -45.0
-offset_bottom = -35.0
+offset_left = -50.0
+offset_top = -52.0
+offset_right = 50.0
+offset_bottom = -42.0
 
 [connection signal="health_changed" from="EffectReceiver" to="." method="_on_health_changed"]
