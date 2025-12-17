@@ -1,9 +1,14 @@
 extends Resource
 class_name Util
 
-enum AttackType {
-	ALL
+enum Team {
+	player,
+	enemy
 }
+
+#enum AttackType {
+	#ALL
+#}
 
 enum EffectType {
 	NONE,
@@ -11,38 +16,39 @@ enum EffectType {
 	SLOW, # deixa ele lento
 	FREEZE, # deixa parado sem se mover
 	KNOCKBACK, # empurra
-	BLIND, # nao consegue ver os inimigos?
+	#BLIND, # nao consegue ver os inimigos?
 	BURN, # queima, e passa para os colegas
-	POISON,
-	ARMOR_REDUCTION,
-	SPEED_BOOST,
-	ATTACK_BOOST,
-	DEVENSE_BOOST,
-	REGENERATION,
-	INVULNERABLE,
-	COOLDOWN_REDUCTION
+	POISON, # da dano com o tempo sozinho
+	ARMOR_REDUCTION, # diminui a defesa
+	SPEED_BOOST, # deixa mais rapido
+	ATTACK_BOOST, # adiciona dano
+	DEFENSE_BOOST, # aumenta a defesa
+	REGENERATION, # cura
+	INVULNERABLE, # desabilita tomar danos
+	COOLDOWN_REDUCTION, # diminui o cooldown
+	RANGE_BOOST # aumenta o range
 }
 
 enum EffectBehavior {
 	NONE,
-	INSTANT,
-	DAMAGE_OVERTIME,
+	INSTANT, # imediatamente
+	DAMAGE_OVERTIME, # dano ao longo do tempo
 	BUFF,
 	DEBUFF,
-	MOVEMENT
+	#MOVEMENT
 }
 
 enum DamageCategory {
 	NONE,
-	PHYSICAL,
+	#PHYSICAL,
 	ELEMENTAL,
 	#MAGICAL
 }
 
-enum PhysicalType {
-	NONE,
-	SLASH
-}
+#enum PhysicalType {
+	#NONE,
+	#SLASH
+#}
 
 enum ElementalType {
 	NONE,

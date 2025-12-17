@@ -20,6 +20,7 @@ var active_stat_modifiers: Dictionary = {}
 var speed_multiplier := 1.0
 var attack_multiplier := 1.0
 var defense_multiplier := 1.0
+var range_multiplier := 1.0
 
 var active_states: Dictionary = {}
 var state_timers: Dictionary = {}
@@ -80,11 +81,13 @@ func apply_stat(data: StatModifierData):
 	speed_multiplier *= data.speed_multiplier
 	attack_multiplier *= data.attack_multiplier
 	defense_multiplier *= data.defense_multiplier
+	range_multiplier *= data.range_multiplier
 
 func remove_stat(data: StatModifierData):
 	speed_multiplier /= data.speed_multiplier
 	attack_multiplier /= data.attack_multiplier
 	defense_multiplier /= data.defense_multiplier
+	range_multiplier /= data.range_multiplier
 
 func add_stat_modifier(effect: Effect):
 	if effect.stat_modifiers == null:
@@ -138,7 +141,7 @@ func apply_instant_effect(effect: Effect, source: Node2D = null):
 		if source:
 			apply_knockback_from(source.global_position, effect.knockback_strength)
 	
-	if effect.effect_type in [Util.EffectType.STUN]:
+	if effect.effect_type in [Util.EffectType.STUN, Util.EffectType.INVULNERABLE]:
 		apply_state(effect.effect_type, effect.duration)
 	
 	if effect.stat_modifiers:
