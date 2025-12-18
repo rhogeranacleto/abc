@@ -32,7 +32,7 @@ enum EffectType {
 enum EffectBehavior {
 	NONE,
 	INSTANT, # imediatamente
-	DAMAGE_OVERTIME, # dano ao longo do tempo
+	OVERTIME, # dano ao longo do tempo
 	BUFF,
 	DEBUFF,
 	#MOVEMENT

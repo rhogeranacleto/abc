@@ -1,15 +1,92 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0cxp3w8qm717"]
+[gd_scene load_steps=26 format=3 uid="uid://d0cxp3w8qm717"]
 
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_bw80d"]
 [ext_resource type="Script" uid="uid://bcxgf8p0lwgb4" path="res://soldiers/soldier.gd" id="1_g7gc3"]
 [ext_resource type="PackedScene" uid="uid://2dd7cc2lcdl6" path="res://components/effect_receiver/effect_receiver.tscn" id="2_5owwq"]
+[ext_resource type="Script" uid="uid://cl5wxx0ia068a" path="res://effects/stats.gd" id="2_rd4lb"]
+[ext_resource type="Script" uid="uid://bblw7k4x8he4m" path="res://effects/stat.gd" id="3_g1vxy"]
 [ext_resource type="PackedScene" uid="uid://bi6nfdun4sbuk" path="res://soldiers/health/health.tscn" id="3_mwhw5"]
+[ext_resource type="Script" uid="uid://wyi81x2poq15" path="res://effects/modifier.gd" id="4_ybivk"]
+[ext_resource type="PackedScene" uid="uid://8facuiuxibvo" path="res://effects/stat_handler.tscn" id="8_ybivk"]
+[ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="9_1e1fq"]
+[ext_resource type="Script" uid="uid://jh0ai6s72srf" path="res://effects/effect.gd" id="10_np54f"]
+[ext_resource type="Script" uid="uid://cda5t5uekfoos" path="res://effects/stat_modifier.gd" id="11_fmist"]
+
+[sub_resource type="Resource" id="Resource_4aq03"]
+script = ExtResource("2_rd4lb")
+metadata/_custom_type_script = "uid://cl5wxx0ia068a"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bw80d"]
 size = Vector2(50, 60)
 
+[sub_resource type="Resource" id="Resource_nraf2"]
+script = ExtResource("3_g1vxy")
+metadata/_custom_type_script = "uid://bblw7k4x8he4m"
+
+[sub_resource type="Resource" id="Resource_fmist"]
+script = ExtResource("3_g1vxy")
+metadata/_custom_type_script = "uid://bblw7k4x8he4m"
+
+[sub_resource type="Resource" id="Resource_ybivk"]
+script = ExtResource("3_g1vxy")
+metadata/_custom_type_script = "uid://bblw7k4x8he4m"
+
+[sub_resource type="Resource" id="Resource_1e1fq"]
+script = ExtResource("3_g1vxy")
+metadata/_custom_type_script = "uid://bblw7k4x8he4m"
+
+[sub_resource type="Resource" id="Resource_jhhfk"]
+script = ExtResource("3_g1vxy")
+metadata/_custom_type_script = "uid://bblw7k4x8he4m"
+
+[sub_resource type="Resource" id="Resource_qhey3"]
+script = ExtResource("3_g1vxy")
+metadata/_custom_type_script = "uid://bblw7k4x8he4m"
+
+[sub_resource type="Resource" id="Resource_0vigx"]
+script = ExtResource("3_g1vxy")
+base_value = 200
+metadata/_custom_type_script = "uid://bblw7k4x8he4m"
+
+[sub_resource type="Resource" id="Resource_np54f"]
+script = ExtResource("2_rd4lb")
+max_health = SubResource("Resource_jhhfk")
+attack = SubResource("Resource_nraf2")
+defense = SubResource("Resource_1e1fq")
+damage = SubResource("Resource_ybivk")
+range_bonus = SubResource("Resource_qhey3")
+speed = SubResource("Resource_0vigx")
+cooldown = SubResource("Resource_fmist")
+metadata/_custom_type_script = "uid://cl5wxx0ia068a"
+
+[sub_resource type="Resource" id="Resource_m7u6r"]
+script = ExtResource("4_ybivk")
+amount = 0.9
+type = 1
+duration = 5.0
+metadata/_custom_type_script = "uid://wyi81x2poq15"
+
+[sub_resource type="Resource" id="Resource_yll5r"]
+script = ExtResource("11_fmist")
+speed = SubResource("Resource_m7u6r")
+metadata/_custom_type_script = "uid://cda5t5uekfoos"
+
+[sub_resource type="Resource" id="Resource_fxx1y"]
+script = ExtResource("10_np54f")
+name = "Slow"
+effect_type = 2
+behavior = 4
+stat_modifiers = SubResource("Resource_yll5r")
+metadata/_custom_type_script = "uid://jh0ai6s72srf"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jhhfk"]
+radius = 30.0
+
 [node name="Soldier" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_g7gc3")
+stats = SubResource("Resource_4aq03")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -50.0
@@ -21,11 +98,14 @@ text = "A"
 label_settings = ExtResource("1_bw80d")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bw80d")
 
-[node name="EffectReceiver" parent="." instance=ExtResource("2_5owwq")]
+[node name="EffectReceiver" parent="." node_paths=PackedStringArray("health", "stats_handler") instance=ExtResource("2_5owwq")]
+health = NodePath("../Health")
+stats_handler = NodePath("../StatHandler")
 
 [node name="Health" parent="." instance=ExtResource("3_mwhw5")]
 offset_left = -50.0
@@ -33,4 +113,15 @@ offset_top = -52.0
 offset_right = 50.0
 offset_bottom = -42.0
 
-[connection signal="health_changed" from="EffectReceiver" to="." method="_on_health_changed"]
+[node name="StatHandler" parent="." instance=ExtResource("8_ybivk")]
+stats = SubResource("Resource_np54f")
+
+[node name="Fake weapon" type="Node2D" parent="."]
+
+[node name="HitBox" parent="Fake weapon" instance=ExtResource("9_1e1fq")]
+position = Vector2(228, 2)
+collision_mask = 3
+effects = Array[ExtResource("10_np54f")]([SubResource("Resource_fxx1y")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fake weapon/HitBox"]
+shape = SubResource("CircleShape2D_jhhfk")

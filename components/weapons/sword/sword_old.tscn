@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://d4mrndgb84c65" path="res://components/weapons/sword/sword_old.gd" id="1_v2oyg"]
 [ext_resource type="PackedScene" uid="uid://c03aqukr6wrum" path="res://components/ranger_activator/range_activator.tscn" id="4_o53ic"]
 [ext_resource type="Script" uid="uid://jh0ai6s72srf" path="res://effects/effect.gd" id="4_v2oyg"]
-[ext_resource type="Script" uid="uid://2jvqnvqka8i6" path="res://effects/damage_data.gd" id="5_v2oyg"]
+[ext_resource type="Script" uid="uid://2jvqnvqka8i6" path="res://effects/health_data.gd" id="5_v2oyg"]
 [ext_resource type="Texture2D" uid="uid://c0mc1peomcbkq" path="res://emojis.png" id="5_xyq31"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v2oyg"]

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var team : Util.Team
+@export var stats : Stats
 
 @onready var effect_receiver = $EffectReceiver
 @onready var health : ProgressBar = $Health

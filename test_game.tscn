@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bg5b4405jx1u8"]
+[gd_scene load_steps=14 format=3 uid="uid://bg5b4405jx1u8"]
 
 [ext_resource type="Texture2D" uid="uid://dummsau6f0b0h" path="res://grass.webp" id="1_wpsn8"]
 [ext_resource type="PackedScene" uid="uid://br45xvw6b2lno" path="res://target_follow.tscn" id="2_2d1aj"]
@@ -10,9 +10,6 @@
 [ext_resource type="Script" uid="uid://bgho0nn52h27q" path="res://effects/one_hit_damage_res.gd" id="6_rb8mk"]
 [ext_resource type="PackedScene" uid="uid://dx8duy0p58vcx" path="res://components/weapons/shooting_gun/shooting_gun.tscn" id="6_vkvqs"]
 [ext_resource type="PackedScene" uid="uid://d0cxp3w8qm717" path="res://soldiers/soldier.tscn" id="10_rb8mk"]
-[ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="11_ok40i"]
-[ext_resource type="Script" uid="uid://jh0ai6s72srf" path="res://effects/effect.gd" id="12_cr2h7"]
-[ext_resource type="Script" uid="uid://2jvqnvqka8i6" path="res://effects/damage_data.gd" id="13_fqdco"]
 
 [sub_resource type="Resource" id="Resource_8xn62"]
 script = ExtResource("6_rb8mk")
@@ -31,23 +28,6 @@ script/source = "extends Node2D
 func _physics_process(delta: float) -> void:
 	global_position = get_global_mouse_position()
 "
-
-[sub_resource type="Resource" id="Resource_1nbgo"]
-script = ExtResource("13_fqdco")
-amount = 5.0
-metadata/_custom_type_script = "uid://2jvqnvqka8i6"
-
-[sub_resource type="Resource" id="Resource_rvmwm"]
-script = ExtResource("12_cr2h7")
-name = "Damage"
-behavior = 1
-damage = SubResource("Resource_1nbgo")
-duration = 5.0
-tick_interval = 0.5
-metadata/_custom_type_script = "uid://jh0ai6s72srf"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_wi7rx"]
-radius = 43.104523
 
 [node name="TestGame" type="Node2D"]
 
@@ -101,20 +81,11 @@ position = Vector2(225, 399)
 collision_mask = 2
 
 [node name="Soldier" parent="." instance=ExtResource("10_rb8mk")]
-position = Vector2(560, 305)
-collision_mask = 0
+position = Vector2(480, 255)
 
 [node name="MouseFollow" type="Node2D" parent="."]
 script = SubResource("GDScript_rb8mk")
 
 [node name="Enemy" parent="MouseFollow" instance=ExtResource("10_rb8mk")]
-process_mode = 4
-visible = false
+collision_layer = 2
 team = 1
-
-[node name="HitBox" parent="MouseFollow" instance=ExtResource("11_ok40i")]
-collision_mask = 1
-effects = Array[ExtResource("12_cr2h7")]([SubResource("Resource_rvmwm")])
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseFollow/HitBox"]
-shape = SubResource("CircleShape2D_wi7rx")

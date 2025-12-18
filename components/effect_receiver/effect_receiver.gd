@@ -4,17 +4,14 @@ extends Node2D
 
 signal effect_started(effect_type: Util.EffectType)
 signal effect_ended(effect_type: Util.EffectType)
-signal health_changed(current_health: float, max_health: float)
-signal damaged(amount: float)
-signal died
 
-@export var max_health : int = 100
-var current_health : int = 100
+@export var health : Health
+@export var stats_handler :  StatsHandler
 
 var velocity_knockback : Vector2 = Vector2.ZERO
 var knockback_friction : float = 800.0
 
-var active_damage_over_time: Array[Dictionary] = []
+var active_overtime_effects: Array[Dictionary] = []
 var active_stat_modifiers: Dictionary = {}
 
 var speed_multiplier := 1.0
@@ -26,7 +23,7 @@ var active_states: Dictionary = {}
 var state_timers: Dictionary = {}
 
 func _physics_process(delta: float) -> void:
-	process_damage_over_time(delta)
+	process_overtime_effect(delta)
 	process_stat_modifiers(delta)
 	process_state_timers(delta)
 	process_knockback(delta)
@@ -39,42 +36,39 @@ func apply_effect(effect: Effect, source: Node2D = null):
 	match effect.behavior:
 		Util.EffectBehavior.INSTANT:
 			apply_instant_effect(effect, source)
-		Util.EffectBehavior.DAMAGE_OVERTIME:
+		Util.EffectBehavior.OVERTIME:
 			add_damage_over_time_effect(effect)
 		Util.EffectBehavior.BUFF, Util.EffectBehavior.DEBUFF:
 			add_stat_modifier(effect)
 
-func take_damage(damage: DamageData):
+func take_damage(damage: HealthData):
 	var final_damage = damage.amount
-	current_health = clamp(current_health - final_damage, 0, max_health)
 	
-	damaged.emit(final_damage)
-	health_changed.emit(current_health, max_health)
-	
-	if current_health <= 0:
-		died.emit()
+	health.take_damage(final_damage)
 
 func add_damage_over_time_effect(effect: Effect):
-	active_damage_over_time.append({
+	active_overtime_effects.append({
 		"effect": effect,
 		"timer": 0.0,
 		"elapsed": 0.0
 	})
 
-func process_damage_over_time(delta: float):
-	for dot in active_damage_over_time:
-		var effect : Effect = dot.effect
-		dot['elapsed'] += delta
-		dot['timer'] += delta
+func process_overtime_effect(delta: float):
+	for overtime_effect in active_overtime_effects:
+		var effect : Effect = overtime_effect.effect
+		overtime_effect['elapsed'] += delta
+		overtime_effect['timer'] += delta
 		
-		if dot['timer'] >= effect.tick_interval:
-			dot['timer'] = 0.0
-			if effect.damage:
-				take_damage(effect.damage)
+		if overtime_effect['timer'] >= effect.tick_interval:
+			overtime_effect['timer'] = 0.0
+			if effect.damage_data:
+				take_damage(effect.damage_data)
+			if effect.healing_data:
+				health.heal(effect.healing_data.amount)
 		
-		if dot['elapsed'] >= effect.duration:
+		if overtime_effect['elapsed'] >= effect.duration:
 			effect_ended.emit(effect.effect_type)
-			active_damage_over_time.erase(dot)
+			active_overtime_effects.erase(overtime_effect)
 			return
 
 func apply_stat(data: StatModifierData):
@@ -134,8 +128,11 @@ func is_under(effect_type: Util.EffectType) -> bool:
 	return active_states.get(effect_type, false)
 
 func apply_instant_effect(effect: Effect, source: Node2D = null):
-	if effect.damage:
-		take_damage(effect.damage)
+	if effect.damage_data:
+		take_damage(effect.damage_data)
+	
+	if effect.healing_data:
+		health.heal(effect.healing_data.amount)
 	
 	if effect.effect_type == Util.EffectType.KNOCKBACK:
 		if source:
