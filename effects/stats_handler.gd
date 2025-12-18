@@ -6,7 +6,6 @@ class_name StatsHandler
 signal max_health_modified
 signal attack_modified
 signal defense_modified
-signal damage_modified
 signal range_bonus_modified
 signal speed_modified
 signal cooldown_modified

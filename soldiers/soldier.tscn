@@ -1,8 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://d0cxp3w8qm717"]
+[gd_scene load_steps=30 format=3 uid="uid://d0cxp3w8qm717"]
 
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_bw80d"]
 [ext_resource type="Script" uid="uid://bcxgf8p0lwgb4" path="res://soldiers/soldier.gd" id="1_g7gc3"]
-[ext_resource type="PackedScene" uid="uid://2dd7cc2lcdl6" path="res://components/effect_receiver/effect_receiver.tscn" id="2_5owwq"]
 [ext_resource type="Script" uid="uid://cl5wxx0ia068a" path="res://effects/stats.gd" id="2_rd4lb"]
 [ext_resource type="Script" uid="uid://bblw7k4x8he4m" path="res://effects/stat.gd" id="3_g1vxy"]
 [ext_resource type="PackedScene" uid="uid://brnch0oygfydv" path="res://soldiers/health/health.tscn" id="3_mwhw5"]
@@ -59,10 +58,6 @@ metadata/_custom_type_script = "uid://bblw7k4x8he4m"
 script = ExtResource("3_g1vxy")
 metadata/_custom_type_script = "uid://bblw7k4x8he4m"
 
-[sub_resource type="Resource" id="Resource_bgkxl"]
-script = ExtResource("3_g1vxy")
-metadata/_custom_type_script = "uid://bblw7k4x8he4m"
-
 [sub_resource type="Resource" id="Resource_omhan"]
 script = ExtResource("3_g1vxy")
 metadata/_custom_type_script = "uid://bblw7k4x8he4m"
@@ -88,7 +83,6 @@ script = ExtResource("2_rd4lb")
 max_health = SubResource("Resource_w0gai")
 attack = SubResource("Resource_0vigx")
 defense = SubResource("Resource_omhan")
-damage = SubResource("Resource_bgkxl")
 range_bonus = SubResource("Resource_whsiu")
 speed = SubResource("Resource_1usf0")
 cooldown = SubResource("Resource_nraf2")
@@ -136,10 +130,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bw80d")
-
-[node name="EffectReceiver" parent="." node_paths=PackedStringArray("health", "stats_handler") instance=ExtResource("2_5owwq")]
-health = NodePath("../LifeBar")
-stats_handler = NodePath("../StatsHandler")
 
 [node name="Fake weapon" type="Node2D" parent="."]
 
