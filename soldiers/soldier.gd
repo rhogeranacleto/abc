@@ -4,13 +4,17 @@ extends CharacterBody2D
 @export var stats : Stats
 
 @onready var effect_receiver = $EffectReceiver
-@onready var health : ProgressBar = $Health
+@onready var stats_handler : StatsHandler = $StatsHandler
+@onready var status_effect_manager : StatusEffectManager = $StatusEffectManager
+
 
 func receive_hit(effects: Array[Effect], source: Node2D = null):
 	for effect in effects:
-		effect_receiver.apply_effect(effect, source)
+		match effect.get_script():
+			StatBuff:
+				stats_handler.apply_buff(effect)
+			DamageEffect, HealEffect:
+				status_effect_manager.apply_effect(effect)
 
-func _on_health_changed(current_health: float, max_health: float) -> void:
-	health.prev_value = health.value
-	health.value = current_health
-	health.max_value = max_health
+func _on_health_died() -> void:
+	queue_free()

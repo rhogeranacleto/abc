@@ -1,16 +1,19 @@
-[gd_scene load_steps=26 format=3 uid="uid://d0cxp3w8qm717"]
+[gd_scene load_steps=32 format=3 uid="uid://d0cxp3w8qm717"]
 
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_bw80d"]
 [ext_resource type="Script" uid="uid://bcxgf8p0lwgb4" path="res://soldiers/soldier.gd" id="1_g7gc3"]
 [ext_resource type="PackedScene" uid="uid://2dd7cc2lcdl6" path="res://components/effect_receiver/effect_receiver.tscn" id="2_5owwq"]
 [ext_resource type="Script" uid="uid://cl5wxx0ia068a" path="res://effects/stats.gd" id="2_rd4lb"]
 [ext_resource type="Script" uid="uid://bblw7k4x8he4m" path="res://effects/stat.gd" id="3_g1vxy"]
-[ext_resource type="PackedScene" uid="uid://bi6nfdun4sbuk" path="res://soldiers/health/health.tscn" id="3_mwhw5"]
-[ext_resource type="Script" uid="uid://wyi81x2poq15" path="res://effects/modifier.gd" id="4_ybivk"]
-[ext_resource type="PackedScene" uid="uid://8facuiuxibvo" path="res://effects/stat_handler.tscn" id="8_ybivk"]
+[ext_resource type="PackedScene" uid="uid://brnch0oygfydv" path="res://soldiers/health/health.tscn" id="3_mwhw5"]
+[ext_resource type="PackedScene" uid="uid://bi6nfdun4sbuk" path="res://soldiers/health/life_bar.tscn" id="6_0vigx"]
+[ext_resource type="PackedScene" uid="uid://8facuiuxibvo" path="res://effects/stats_handler.tscn" id="8_ybivk"]
 [ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="9_1e1fq"]
 [ext_resource type="Script" uid="uid://jh0ai6s72srf" path="res://effects/effect.gd" id="10_np54f"]
-[ext_resource type="Script" uid="uid://cda5t5uekfoos" path="res://effects/stat_modifier.gd" id="11_fmist"]
+[ext_resource type="Script" uid="uid://dmhe4bue3appm" path="res://effects/stat_buff.gd" id="11_np54f"]
+[ext_resource type="Script" uid="uid://d3v6njbogj602" path="res://effects/damage_effect.gd" id="13_0vigx"]
+[ext_resource type="Script" uid="uid://d24n6da8mdo7h" path="res://effects/knockback.gd" id="13_qhey3"]
+[ext_resource type="PackedScene" uid="uid://daypdookw1by8" path="res://effects/status_effect_manager.tscn" id="15_nraf2"]
 
 [sub_resource type="Resource" id="Resource_4aq03"]
 script = ExtResource("2_rd4lb")
@@ -19,68 +22,97 @@ metadata/_custom_type_script = "uid://cl5wxx0ia068a"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bw80d"]
 size = Vector2(50, 60)
 
+[sub_resource type="Resource" id="Resource_m7u6r"]
+script = ExtResource("11_np54f")
+amount = 4.0
+duration = 4.0
+metadata/_custom_type_script = "uid://dmhe4bue3appm"
+
+[sub_resource type="Resource" id="Resource_fxx1y"]
+script = ExtResource("11_np54f")
+name = 4
+amount = 0.3
+type = 1
+duration = 4.0
+metadata/_custom_type_script = "uid://dmhe4bue3appm"
+
+[sub_resource type="Resource" id="Resource_xa1dm"]
+script = ExtResource("13_qhey3")
+knockback_strength = 4.0
+metadata/_custom_type_script = "uid://d24n6da8mdo7h"
+
+[sub_resource type="Resource" id="Resource_yll5r"]
+script = ExtResource("13_0vigx")
+amount = 50.0
+metadata/_custom_type_script = "uid://d3v6njbogj602"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jhhfk"]
+radius = 30.0
+
+[sub_resource type="Resource" id="Resource_0vigx"]
+script = ExtResource("3_g1vxy")
+metadata/_custom_type_script = "uid://bblw7k4x8he4m"
+
 [sub_resource type="Resource" id="Resource_nraf2"]
 script = ExtResource("3_g1vxy")
 metadata/_custom_type_script = "uid://bblw7k4x8he4m"
 
-[sub_resource type="Resource" id="Resource_fmist"]
+[sub_resource type="Resource" id="Resource_bgkxl"]
 script = ExtResource("3_g1vxy")
 metadata/_custom_type_script = "uid://bblw7k4x8he4m"
 
-[sub_resource type="Resource" id="Resource_ybivk"]
+[sub_resource type="Resource" id="Resource_omhan"]
 script = ExtResource("3_g1vxy")
 metadata/_custom_type_script = "uid://bblw7k4x8he4m"
 
-[sub_resource type="Resource" id="Resource_1e1fq"]
+[sub_resource type="Resource" id="Resource_w0gai"]
+resource_local_to_scene = true
+script = ExtResource("3_g1vxy")
+base_value = 100
+metadata/_custom_type_script = "uid://bblw7k4x8he4m"
+
+[sub_resource type="Resource" id="Resource_whsiu"]
 script = ExtResource("3_g1vxy")
 metadata/_custom_type_script = "uid://bblw7k4x8he4m"
 
-[sub_resource type="Resource" id="Resource_jhhfk"]
-script = ExtResource("3_g1vxy")
-metadata/_custom_type_script = "uid://bblw7k4x8he4m"
-
-[sub_resource type="Resource" id="Resource_qhey3"]
-script = ExtResource("3_g1vxy")
-metadata/_custom_type_script = "uid://bblw7k4x8he4m"
-
-[sub_resource type="Resource" id="Resource_0vigx"]
+[sub_resource type="Resource" id="Resource_1usf0"]
 script = ExtResource("3_g1vxy")
 base_value = 200
 metadata/_custom_type_script = "uid://bblw7k4x8he4m"
 
-[sub_resource type="Resource" id="Resource_np54f"]
+[sub_resource type="Resource" id="Resource_xnaau"]
+resource_local_to_scene = true
 script = ExtResource("2_rd4lb")
-max_health = SubResource("Resource_jhhfk")
-attack = SubResource("Resource_nraf2")
-defense = SubResource("Resource_1e1fq")
-damage = SubResource("Resource_ybivk")
-range_bonus = SubResource("Resource_qhey3")
-speed = SubResource("Resource_0vigx")
-cooldown = SubResource("Resource_fmist")
+max_health = SubResource("Resource_w0gai")
+attack = SubResource("Resource_0vigx")
+defense = SubResource("Resource_omhan")
+damage = SubResource("Resource_bgkxl")
+range_bonus = SubResource("Resource_whsiu")
+speed = SubResource("Resource_1usf0")
+cooldown = SubResource("Resource_nraf2")
 metadata/_custom_type_script = "uid://cl5wxx0ia068a"
 
-[sub_resource type="Resource" id="Resource_m7u6r"]
-script = ExtResource("4_ybivk")
-amount = 0.9
-type = 1
-duration = 5.0
-metadata/_custom_type_script = "uid://wyi81x2poq15"
+[sub_resource type="LabelSettings" id="LabelSettings_qhey3"]
+font_size = 11
 
-[sub_resource type="Resource" id="Resource_yll5r"]
-script = ExtResource("11_fmist")
-speed = SubResource("Resource_m7u6r")
-metadata/_custom_type_script = "uid://cda5t5uekfoos"
+[sub_resource type="GDScript" id="GDScript_qhey3"]
+script/source = "extends Label
 
-[sub_resource type="Resource" id="Resource_fxx1y"]
-script = ExtResource("10_np54f")
-name = "Slow"
-effect_type = 2
-behavior = 4
-stat_modifiers = SubResource("Resource_yll5r")
-metadata/_custom_type_script = "uid://jh0ai6s72srf"
+@export var stats_handler : StatsHandler
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jhhfk"]
-radius = 30.0
+func _process(delta: float) -> void:
+	text = \"\"
+	for stat_name in Stats.Types.keys():
+		var stat = stats_handler.stats.get(stat_name.to_lower())
+		
+		text += stat_name.to_lower() + \" \" + str(stat.base_value) + \" (\"
+		
+		for mod in stat.modifiers:
+			text += (\"+\" if mod.type == Modifier.Type.ADD else \"*\") + str(mod.amount)
+		
+		text += \")\\n\"
+	pass
+"
 
 [node name="Soldier" type="CharacterBody2D"]
 collision_layer = 0
@@ -104,24 +136,43 @@ metadata/_edit_use_anchors_ = true
 shape = SubResource("RectangleShape2D_bw80d")
 
 [node name="EffectReceiver" parent="." node_paths=PackedStringArray("health", "stats_handler") instance=ExtResource("2_5owwq")]
-health = NodePath("../Health")
-stats_handler = NodePath("../StatHandler")
-
-[node name="Health" parent="." instance=ExtResource("3_mwhw5")]
-offset_left = -50.0
-offset_top = -52.0
-offset_right = 50.0
-offset_bottom = -42.0
-
-[node name="StatHandler" parent="." instance=ExtResource("8_ybivk")]
-stats = SubResource("Resource_np54f")
+health = NodePath("../LifeBar")
+stats_handler = NodePath("../StatsHandler")
 
 [node name="Fake weapon" type="Node2D" parent="."]
 
 [node name="HitBox" parent="Fake weapon" instance=ExtResource("9_1e1fq")]
 position = Vector2(228, 2)
 collision_mask = 3
-effects = Array[ExtResource("10_np54f")]([SubResource("Resource_fxx1y")])
+effects = Array[ExtResource("10_np54f")]([SubResource("Resource_m7u6r"), SubResource("Resource_fxx1y"), SubResource("Resource_xa1dm"), SubResource("Resource_yll5r")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fake weapon/HitBox"]
 shape = SubResource("CircleShape2D_jhhfk")
+
+[node name="Health" parent="." node_paths=PackedStringArray("stats_handler") instance=ExtResource("3_mwhw5")]
+stats_handler = NodePath("../StatsHandler")
+
+[node name="StatsHandler" parent="." instance=ExtResource("8_ybivk")]
+stats = SubResource("Resource_xnaau")
+
+[node name="StatusEffectManager" parent="." node_paths=PackedStringArray("health") instance=ExtResource("15_nraf2")]
+health = NodePath("../Health")
+
+[node name="LifeBar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_0vigx")]
+offset_left = -50.0
+offset_top = -52.0
+offset_right = 50.0
+offset_bottom = -42.0
+health = NodePath("../Health")
+
+[node name="DebugStats" type="Label" parent="." node_paths=PackedStringArray("stats_handler")]
+offset_left = -26.0
+offset_top = 58.0
+offset_right = 14.0
+offset_bottom = 81.0
+text = "max: 2 (+3, *0.5)"
+label_settings = SubResource("LabelSettings_qhey3")
+script = SubResource("GDScript_qhey3")
+stats_handler = NodePath("../StatsHandler")
+
+[connection signal="died" from="Health" to="." method="_on_health_died"]

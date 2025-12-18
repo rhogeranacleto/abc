@@ -29,22 +29,55 @@ func _physics_process(delta: float) -> void:
 	process_knockback(delta)
 
 func apply_effect(effect: Effect, source: Node2D = null):
-	print(effect.name)
+	print(effect)
 	
-	effect_started.emit(effect.effect_type)
+	#effect_started.emit(effect)
 	
-	match effect.behavior:
-		Util.EffectBehavior.INSTANT:
-			apply_instant_effect(effect, source)
-		Util.EffectBehavior.OVERTIME:
-			add_damage_over_time_effect(effect)
-		Util.EffectBehavior.BUFF, Util.EffectBehavior.DEBUFF:
-			add_stat_modifier(effect)
+	match effect.get_script():
+		StatBuff:
+			print('bugg', effect)
+		DamageEffect, HealEffect:
+			apply_health_change_effect(effect)
+		Knockback:
+			print('kmocn', effect)
+	
+	#match effect.behavior:
+		#Util.EffectBehavior.INSTANT:
+			#apply_instant_effect(effect, source)
+		#Util.EffectBehavior.OVERTIME:
+			#add_damage_over_time_effect(effect)
+		#Util.EffectBehavior.BUFF, Util.EffectBehavior.DEBUFF:
+			#add_stat_modifier(effect)
 
-func take_damage(damage: HealthData):
+func take_damage(damage: DamageEffect):
 	var final_damage = damage.amount
 	
 	health.take_damage(final_damage)
+
+func heal(healing: HealEffect):
+	var final_heal = healing.amount
+	
+	health.heal(final_heal)
+
+func handle_health_change(effect: HealthChange):
+	match effect.get_script():
+		HealEffect:
+			heal(effect)
+		DamageEffect:
+			take_damage(effect)
+
+func apply_health_change_effect(effect: HealthChange):
+	if effect.duration > 0:
+		add_health_change_overtime_effect(effect)
+	else:
+		handle_health_change(effect)
+	
+func add_health_change_overtime_effect(effect: HealthChange):
+	active_overtime_effects.append({
+		"effect": effect,
+		"timer": 0.0,
+		"elapsed": 0.0
+	})
 
 func add_damage_over_time_effect(effect: Effect):
 	active_overtime_effects.append({
@@ -55,19 +88,16 @@ func add_damage_over_time_effect(effect: Effect):
 
 func process_overtime_effect(delta: float):
 	for overtime_effect in active_overtime_effects:
-		var effect : Effect = overtime_effect.effect
+		var effect : HealthChange = overtime_effect.effect
 		overtime_effect['elapsed'] += delta
 		overtime_effect['timer'] += delta
 		
 		if overtime_effect['timer'] >= effect.tick_interval:
 			overtime_effect['timer'] = 0.0
-			if effect.damage_data:
-				take_damage(effect.damage_data)
-			if effect.healing_data:
-				health.heal(effect.healing_data.amount)
+			handle_health_change(effect)
 		
 		if overtime_effect['elapsed'] >= effect.duration:
-			effect_ended.emit(effect.effect_type)
+			#effect_ended.emit(effect.effect_type)
 			active_overtime_effects.erase(overtime_effect)
 			return
 

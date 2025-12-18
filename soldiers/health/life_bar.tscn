@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://bi6nfdun4sbuk"]
+
+[ext_resource type="Script" uid="uid://brg8ag438g6ov" path="res://soldiers/health/life_bar.gd" id="1_270x6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8vsm4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vsm4"]
+bg_color = Color(2.9359758e-06, 0.728228, 0.04500919, 1)
+
+[sub_resource type="Theme" id="Theme_iu7cv"]
+ProgressBar/styles/background = SubResource("StyleBoxEmpty_8vsm4")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_8vsm4")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iu7cv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4yis"]
+bg_color = Color(0.9999998, 0.3524625, 0.16987848, 1)
+
+[sub_resource type="Theme" id="Theme_gcie0"]
+ProgressBar/styles/background = SubResource("StyleBoxEmpty_iu7cv")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_b4yis")
+
+[node name="LifeBar" type="ProgressBar"]
+offset_right = 100.0
+offset_bottom = 10.0
+pivot_offset = Vector2(50, 5)
+theme = SubResource("Theme_iu7cv")
+value = 100.0
+show_percentage = false
+script = ExtResource("1_270x6")
+
+[node name="Damage" type="ProgressBar" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_gcie0")
+value = 100.0
+show_percentage = false
+
+[connection signal="changed" from="." to="." method="_on_changed"]
+[connection signal="value_changed" from="." to="." method="_on_value_changed"]

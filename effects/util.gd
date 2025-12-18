@@ -30,11 +30,11 @@ enum EffectType {
 }
 
 enum EffectBehavior {
-	NONE,
+	#NONE,
 	INSTANT, # imediatamente
 	OVERTIME, # dano ao longo do tempo
-	BUFF,
-	DEBUFF,
+	#BUFF,
+	#DEBUFF,
 	#MOVEMENT
 }
 

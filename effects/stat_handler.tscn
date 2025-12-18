@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://8facuiuxibvo"]
-
-[ext_resource type="Script" uid="uid://cygltv2pypqol" path="res://effects/stat_handler.gd" id="1_5f28p"]
-
-[node name="StatHandler" type="Node"]
-script = ExtResource("1_5f28p")
