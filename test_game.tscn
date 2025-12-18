@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bg5b4405jx1u8"]
+[gd_scene load_steps=19 format=3 uid="uid://bg5b4405jx1u8"]
 
 [ext_resource type="Texture2D" uid="uid://dummsau6f0b0h" path="res://grass.webp" id="1_wpsn8"]
 [ext_resource type="PackedScene" uid="uid://br45xvw6b2lno" path="res://target_follow.tscn" id="2_2d1aj"]
@@ -10,6 +10,9 @@
 [ext_resource type="Script" uid="uid://bgho0nn52h27q" path="res://effects/one_hit_damage_res.gd" id="6_rb8mk"]
 [ext_resource type="PackedScene" uid="uid://dx8duy0p58vcx" path="res://components/weapons/shooting_gun/shooting_gun.tscn" id="6_vkvqs"]
 [ext_resource type="PackedScene" uid="uid://d0cxp3w8qm717" path="res://soldiers/soldier.tscn" id="10_rb8mk"]
+[ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="11_ok40i"]
+[ext_resource type="Script" uid="uid://jh0ai6s72srf" path="res://effects/effect.gd" id="12_cr2h7"]
+[ext_resource type="Script" uid="uid://dwhgkkyw2kxgy" path="res://effects/heal.gd" id="13_cr2h7"]
 
 [sub_resource type="Resource" id="Resource_8xn62"]
 script = ExtResource("6_rb8mk")
@@ -28,6 +31,14 @@ script/source = "extends Node2D
 func _physics_process(delta: float) -> void:
 	global_position = get_global_mouse_position()
 "
+
+[sub_resource type="Resource" id="Resource_fqdco"]
+script = ExtResource("13_cr2h7")
+amount = 20.0
+metadata/_custom_type_script = "uid://dwhgkkyw2kxgy"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1nbgo"]
+radius = 27.0
 
 [node name="TestGame" type="Node2D"]
 
@@ -89,3 +100,11 @@ script = SubResource("GDScript_rb8mk")
 [node name="Enemy" parent="MouseFollow" instance=ExtResource("10_rb8mk")]
 collision_layer = 2
 team = 1
+
+[node name="HitBox" parent="." instance=ExtResource("11_ok40i")]
+position = Vector2(118, 217)
+collision_mask = 3
+effects = Array[ExtResource("12_cr2h7")]([SubResource("Resource_fqdco")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_1nbgo")
