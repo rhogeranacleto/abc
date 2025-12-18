@@ -1,6 +1,7 @@
 extends Area2D
 
-@export var effects : Array[Effect] = []
+@export var effects_old : Array[EffectOld] = []
+@export var effects : Array[Effect]
 
 signal hitted
 
@@ -12,5 +13,9 @@ func _ready() -> void:
 			collision_mask = owner_mask
 
 func area_entered(area: Area2D):
-	area.emit_signal('effects_applied', effects)
+	area.emit_signal('effects_applied', effects_old)
 	hitted.emit()
+
+func _on_hit_box_body_entered(body: Node2D) -> void:
+	if body.has_method('receive_hit'):
+		body.receive_hit(effects, owner)

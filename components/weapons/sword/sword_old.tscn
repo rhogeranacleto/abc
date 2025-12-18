@@ -1,19 +1,35 @@
-[gd_scene load_steps=14 format=3 uid="uid://bj87lcqs0x8lr"]
+[gd_scene load_steps=16 format=3 uid="uid://bj87lcqs0x8lr"]
 
 [ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="1_53e8i"]
 [ext_resource type="Script" uid="uid://d4mrndgb84c65" path="res://components/weapons/sword/sword_old.gd" id="1_v2oyg"]
-[ext_resource type="Script" uid="uid://3wtv26ldj4iu" path="res://effects/effect_res.gd" id="2_xyq31"]
-[ext_resource type="Script" uid="uid://bgho0nn52h27q" path="res://effects/one_hit_damage_res.gd" id="3_v2oyg"]
 [ext_resource type="PackedScene" uid="uid://c03aqukr6wrum" path="res://components/ranger_activator/range_activator.tscn" id="4_o53ic"]
+[ext_resource type="Script" uid="uid://jh0ai6s72srf" path="res://effects/effect.gd" id="4_v2oyg"]
+[ext_resource type="Script" uid="uid://2jvqnvqka8i6" path="res://effects/damage_data.gd" id="5_v2oyg"]
 [ext_resource type="Texture2D" uid="uid://c0mc1peomcbkq" path="res://emojis.png" id="5_xyq31"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v2oyg"]
 radius = 84.0238
 
-[sub_resource type="Resource" id="Resource_7wl1p"]
-script = ExtResource("3_v2oyg")
-damage = 3
-metadata/_custom_type_script = "uid://bgho0nn52h27q"
+[sub_resource type="Resource" id="Resource_o53ic"]
+script = ExtResource("5_v2oyg")
+amount = 5.0
+metadata/_custom_type_script = "uid://2jvqnvqka8i6"
+
+[sub_resource type="Resource" id="Resource_xyq31"]
+script = ExtResource("4_v2oyg")
+name = "sword hit"
+behavior = 1
+damage = SubResource("Resource_o53ic")
+metadata/_custom_type_script = "uid://jh0ai6s72srf"
+
+[sub_resource type="Resource" id="Resource_v2oyg"]
+script = ExtResource("4_v2oyg")
+name = "sword_bleed"
+behavior = 2
+damage = SubResource("Resource_o53ic")
+duration = 5.0
+tick_interval = 2.0
+metadata/_custom_type_script = "uid://jh0ai6s72srf"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dc8qm"]
 size = Vector2(10, 50)
@@ -86,13 +102,15 @@ _data = {
 script = ExtResource("1_v2oyg")
 
 [node name="RangeActivator" parent="." instance=ExtResource("4_o53ic")]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RangeActivator"]
 shape = SubResource("CircleShape2D_v2oyg")
 
 [node name="HitBox" parent="." instance=ExtResource("1_53e8i")]
+collision_mask = 2
 monitoring = false
-effects = Array[ExtResource("2_xyq31")]([SubResource("Resource_7wl1p")])
+effects = Array[ExtResource("4_v2oyg")]([SubResource("Resource_xyq31"), SubResource("Resource_v2oyg")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, -57)

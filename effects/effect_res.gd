@@ -1,1 +1,1 @@
-@abstract class_name Effect extends Resource
+@abstract class_name EffectOld extends Resource

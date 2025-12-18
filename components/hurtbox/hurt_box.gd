@@ -27,7 +27,7 @@ const DAMAGE_HIT_DISPLAY = preload("uid://bxe58yo6eqj7b")
 
 signal hurt(amount: float)
 signal effect_hurt(amount: float)
-signal effects_applied(effects: Array[Effect])
+signal effects_applied(effects: Array[EffectOld])
 
 func _ready() -> void:
 	health_bar.max_value = max_health
@@ -55,7 +55,7 @@ func _on_hurt(amount: float) -> void:
 	if cooldown > 0.0:
 		cooldown_timer.start(cooldown)
 	
-func _on_effects_applied(effects: Array[Effect]) -> void:
+func _on_effects_applied(effects: Array[EffectOld]) -> void:
 	for effect in effects:
 		match effect.get_script():
 			DamageOverTimeEffect:

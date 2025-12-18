@@ -1,4 +1,4 @@
-class_name DamageOverTimeEffect extends Effect
+class_name DamageOverTimeEffect extends EffectOld
 
 @export var damage : float
 @export var duration : float

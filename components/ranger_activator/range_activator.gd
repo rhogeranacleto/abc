@@ -5,13 +5,13 @@ class_name RangeActivator extends Area2D
 @onready var cooldown_timer: Timer = $Cooldown
 #@onready var cooldown
 
-signal activate(sorted_targets: Array[Area2D])
+signal activate(sorted_targets: Array[Node2D])
 
 func _ready() -> void:
 	collision_mask = owner.get('collision_mask')
 
 func _process(_delta: float) -> void:
-	var targets = get_overlapping_areas()
+	var targets = get_overlapping_bodies()
 	
 	if targets.is_empty():
 		return

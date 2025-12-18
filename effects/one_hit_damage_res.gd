@@ -1,4 +1,4 @@
-class_name OneHitDamage extends Effect
+class_name OneHitDamage extends EffectOld
 
 @export var damage : int
 

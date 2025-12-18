@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://2dd7cc2lcdl6"]
+
+[ext_resource type="Script" uid="uid://evt4vwxl7f8l" path="res://components/effect_receiver/effect_receiver.gd" id="1_yronf"]
+
+[node name="EffectReceiver" type="Node2D"]
+script = ExtResource("1_yronf")
