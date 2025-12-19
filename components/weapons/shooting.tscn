@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=3 uid="uid://dm3lafdwtaaah"]
+
+[ext_resource type="PackedScene" uid="uid://cr4ngb2226b50" path="res://components/weapons/weapon_controller.tscn" id="1_b2bjx"]
+[ext_resource type="Script" uid="uid://dmhe4bue3appm" path="res://effects/stat_buff.gd" id="2_cquid"]
+[ext_resource type="Script" uid="uid://bblw7k4x8he4m" path="res://effects/stat.gd" id="3_6mtt6"]
+[ext_resource type="Script" uid="uid://cl5wxx0ia068a" path="res://effects/stats.gd" id="4_gn0o1"]
+[ext_resource type="Texture2D" uid="uid://doowry3rmkwre" path="res://components/weapons/shooting_gun_old/gun.png" id="5_6mtt6"]
+
+[sub_resource type="Resource" id="Resource_6mtt6"]
+script = ExtResource("3_6mtt6")
+metadata/_custom_type_script = "uid://bblw7k4x8he4m"
+
+[sub_resource type="Resource" id="Resource_gn0o1"]
+script = ExtResource("3_6mtt6")
+metadata/_custom_type_script = "uid://bblw7k4x8he4m"
+
+[sub_resource type="Resource" id="Resource_b7aa5"]
+script = ExtResource("2_cquid")
+name = 3
+amount = 2.5
+type = 1
+metadata/_custom_type_script = "uid://dmhe4bue3appm"
+
+[sub_resource type="Resource" id="Resource_r2c0f"]
+script = ExtResource("3_6mtt6")
+base_value = 100
+modifiers = Array[ExtResource("2_cquid")]([SubResource("Resource_b7aa5")])
+metadata/_custom_type_script = "uid://bblw7k4x8he4m"
+
+[sub_resource type="Resource" id="Resource_38pvs"]
+resource_local_to_scene = true
+script = ExtResource("4_gn0o1")
+attack = SubResource("Resource_6mtt6")
+range_bonus = SubResource("Resource_r2c0f")
+cooldown = SubResource("Resource_gn0o1")
+metadata/_custom_type_script = "uid://cl5wxx0ia068a"
+
+[node name="Shooting" node_paths=PackedStringArray("range_area", "cooldown") groups=["weapon"] instance=ExtResource("1_b2bjx")]
+stats = SubResource("Resource_38pvs")
+range_area = NodePath("Area2D")
+cooldown = NodePath("Cooldown")
+
+[node name="Area2D" type="Area2D" parent="." index="0"]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+[node name="GunSprite" type="Sprite2D" parent="." index="1"]
+position = Vector2(35, 0)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_6mtt6")
+
+[node name="Cooldown" type="Timer" parent="." index="2"]

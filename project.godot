@@ -27,6 +27,6 @@ soldier=""
 
 [layer_names]
 
-2d_physics/layer_1="soldier"
-2d_physics/layer_2="target"
+2d_physics/layer_1="player"
+2d_physics/layer_2="enemy"
 2d_physics/layer_3="bullet"

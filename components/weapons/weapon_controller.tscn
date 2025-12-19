@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr4ngb2226b50"]
+
+[ext_resource type="Script" uid="uid://gpoxidbtcrf0" path="res://components/weapons/weapon_controller.gd" id="1_cmh7i"]
+[ext_resource type="PackedScene" uid="uid://8facuiuxibvo" path="res://effects/stats_handler.tscn" id="2_pypu1"]
+
+[node name="WeaponController" type="Node2D"]
+script = ExtResource("1_cmh7i")
+
+[node name="StatsHandler" parent="." instance=ExtResource("2_pypu1")]

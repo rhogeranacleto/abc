@@ -2,8 +2,8 @@ extends Resource
 class_name Util
 
 enum Team {
-	player,
-	enemy
+	PLAYER,
+	ENEMY
 }
 
 #enum AttackType {
