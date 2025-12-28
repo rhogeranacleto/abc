@@ -20,7 +20,7 @@ func _process(_delta: float) -> void:
 		shoot()
 
 func shoot():
-	cooldown.start()
+	cooldown.start(weapon_controller.recalculate_coodown())
 	
 	var projectile = ContinuousBullet.instanciate(weapon_controller.effects, weapon_range.collision_mask)
 	

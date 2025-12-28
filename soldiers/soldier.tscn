@@ -1,45 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://d0cxp3w8qm717"]
+[gd_scene load_steps=11 format=3 uid="uid://d0cxp3w8qm717"]
 
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="1_bw80d"]
 [ext_resource type="Script" uid="uid://bcxgf8p0lwgb4" path="res://soldiers/soldier.gd" id="1_g7gc3"]
-[ext_resource type="Script" uid="uid://cl5wxx0ia068a" path="res://effects/stats.gd" id="2_rd4lb"]
-[ext_resource type="Script" uid="uid://bblw7k4x8he4m" path="res://effects/stat.gd" id="3_g1vxy"]
 [ext_resource type="PackedScene" uid="uid://brnch0oygfydv" path="res://soldiers/health/health.tscn" id="3_mwhw5"]
 [ext_resource type="PackedScene" uid="uid://bi6nfdun4sbuk" path="res://soldiers/health/life_bar.tscn" id="6_0vigx"]
 [ext_resource type="PackedScene" uid="uid://8facuiuxibvo" path="res://effects/stats_handler.tscn" id="8_ybivk"]
 [ext_resource type="PackedScene" uid="uid://dm3lafdwtaaah" path="res://components/weapons/shooting.tscn" id="10_jhhfk"]
-[ext_resource type="Script" uid="uid://jh0ai6s72srf" path="res://effects/effect.gd" id="11_fmist"]
-[ext_resource type="Script" uid="uid://dmhe4bue3appm" path="res://effects/stat_buff.gd" id="11_np54f"]
 [ext_resource type="PackedScene" uid="uid://daypdookw1by8" path="res://effects/status_effect_manager.tscn" id="15_nraf2"]
-
-[sub_resource type="Resource" id="Resource_jhhfk"]
-script = ExtResource("3_g1vxy")
-base_value = 100
-metadata/_custom_type_script = "uid://bblw7k4x8he4m"
-
-[sub_resource type="Resource" id="Resource_0vigx"]
-script = ExtResource("11_np54f")
-name = 3
-amount = 2.0
-type = 1
-metadata/_custom_type_script = "uid://dmhe4bue3appm"
-
-[sub_resource type="Resource" id="Resource_nraf2"]
-script = ExtResource("3_g1vxy")
-modifiers = Array[ExtResource("11_np54f")]([SubResource("Resource_0vigx")])
-metadata/_custom_type_script = "uid://bblw7k4x8he4m"
-
-[sub_resource type="Resource" id="Resource_np54f"]
-script = ExtResource("3_g1vxy")
-base_value = 100
-metadata/_custom_type_script = "uid://bblw7k4x8he4m"
-
-[sub_resource type="Resource" id="Resource_fmist"]
-script = ExtResource("2_rd4lb")
-max_health = SubResource("Resource_jhhfk")
-range_bonus = SubResource("Resource_nraf2")
-speed = SubResource("Resource_np54f")
-metadata/_custom_type_script = "uid://cl5wxx0ia068a"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bw80d"]
 size = Vector2(45, 53)
@@ -70,7 +37,6 @@ func _process(delta: float) -> void:
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_g7gc3")
-stats = SubResource("Resource_fmist")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -50.0
@@ -112,6 +78,5 @@ script = SubResource("GDScript_qhey3")
 stats_handler = NodePath("../StatsHandler")
 
 [node name="Shooting" parent="." instance=ExtResource("10_jhhfk")]
-effecs = Array[ExtResource("11_fmist")]([])
 
 [connection signal="died" from="Health" to="." method="_on_health_died"]

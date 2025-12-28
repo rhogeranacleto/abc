@@ -42,7 +42,7 @@ func apply_buff(stat_buff: StatBuff):
 
 func remove_buff(stat_buff: StatBuff):
 	var type_str = Stats.Types.find_key(stat_buff.name).to_lower()
-	
+	print('remove', stat_buff.name, stat_buff)
 	var stat : Stat = get(type_str)
 	
 	stat.modifiers.erase(stat_buff)
@@ -55,7 +55,7 @@ func get_final_value(type: Types) -> float:
 	var stat_name = Types.find_key(type).to_lower()
 	var stat: Stat = get(stat_name)
 	
-	print(stat.modifiers)
+	#print(stat.modifiers)
 	
 	var adds = stat.aggregate_by_type(StatBuff.Type.ADD, 0.0)
 	var multiply = stat.aggregate_by_type(StatBuff.Type.MULTIPLY, 1.0)
@@ -64,6 +64,7 @@ func get_final_value(type: Types) -> float:
 		var dependency_stat: Stat = dependency.get(stat_name)
 		
 		adds += dependency_stat.aggregate_by_type(StatBuff.Type.ADD, 0.0)
-		multiply += dependency_stat.aggregate_by_type(StatBuff.Type.MULTIPLY, 1.0)
+		multiply += dependency_stat.aggregate_by_type(StatBuff.Type.MULTIPLY, 0.0)
 	
+	print(stat.base_value, ' added ', adds, ' multipleied ', multiply, ' results ', (stat.base_value + adds) * multiply)
 	return (stat.base_value + adds) * multiply

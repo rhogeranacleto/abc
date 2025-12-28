@@ -19,6 +19,6 @@ func area_entered(area: Area2D):
 	hitted.emit()
 
 func _on_hit_box_body_entered(body: Node2D) -> void:
-	print(body)
+	#print(body)
 	if body.has_method('receive_hit'):
 		body.receive_hit(effects, owner)

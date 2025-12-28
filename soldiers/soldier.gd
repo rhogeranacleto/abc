@@ -28,7 +28,7 @@ func receive_hit(effects: Array[Effect], source: Node2D = null):
 	for effect in effects:
 		match effect.get_script():
 			StatBuff:
-				stats_handler.apply_buff(effect)
+				stats.apply_buff(effect)
 			DamageEffect, HealEffect:
 				status_effect_manager.apply_effect(effect)
 

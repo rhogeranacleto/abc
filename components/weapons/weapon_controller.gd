@@ -13,12 +13,12 @@ func _ready() -> void:
 		owner_stats = owner.stats
 		stats.dependencies.append(owner_stats)
 		owner_stats.range_bonus_modified.connect(recalculate_range)
-		owner_stats.cooldown_modified.connect(update_cooldown)
+		#owner_stats.cooldown_modified.connect(update_cooldown)
 		
 		call_deferred('update_collision_mask')
 	
 	recalculate_range()
-	update_cooldown()
+	#update_cooldown()
 	
 func recalculate_range():
 	if weapon_range != null:
@@ -26,10 +26,8 @@ func recalculate_range():
 		
 		weapon_range.update_shape_range(final_range)
 
-func update_cooldown():
-	if cooldown != null:
-		print(stats.get_final_value(Stats.Types.COOLDOWN))
-		cooldown.wait_time = stats.get_final_value(Stats.Types.COOLDOWN)
+func recalculate_coodown() -> float:
+	return stats.get_final_value(Stats.Types.COOLDOWN)
 
 func update_collision_mask():
 	match owner.collision_layer:

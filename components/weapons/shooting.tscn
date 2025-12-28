@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dm3lafdwtaaah"]
+[gd_scene load_steps=19 format=3 uid="uid://dm3lafdwtaaah"]
 
 [ext_resource type="PackedScene" uid="uid://cr4ngb2226b50" path="res://components/weapons/weapon_controller.tscn" id="1_b2bjx"]
 [ext_resource type="Script" uid="uid://dmhe4bue3appm" path="res://effects/stat_buff.gd" id="2_cquid"]
@@ -9,15 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://cr1u5r52u0hct" path="res://components/weapons/weapon_range.tscn" id="6_gn0o1"]
 [ext_resource type="Script" uid="uid://d3v6njbogj602" path="res://effects/damage_effect.gd" id="6_itei5"]
 [ext_resource type="Script" uid="uid://4dxr885ea3sv" path="res://components/weapons/shotting_controller.gd" id="7_r2c0f"]
+[ext_resource type="Texture2D" uid="uid://dxfyhld4qs6qp" path="res://red-circle.webp" id="8_itei5"]
 
 [sub_resource type="Resource" id="Resource_itei5"]
 script = ExtResource("3_6mtt6")
-base_value = 0.5
+base_value = 0.2
 metadata/_custom_type_script = "uid://bblw7k4x8he4m"
 
 [sub_resource type="Resource" id="Resource_ryqoa"]
 script = ExtResource("3_6mtt6")
-base_value = 200.0
+base_value = 400.0
 metadata/_custom_type_script = "uid://bblw7k4x8he4m"
 
 [sub_resource type="Resource" id="Resource_rhgco"]
@@ -31,9 +32,42 @@ script = ExtResource("6_itei5")
 amount = 1.0
 metadata/_custom_type_script = "uid://d3v6njbogj602"
 
+[sub_resource type="Resource" id="Resource_n8xky"]
+script = ExtResource("2_cquid")
+name = 5
+amount = 1.0
+duration = 3.0
+id = "cooldown"
+metadata/_custom_type_script = "uid://dmhe4bue3appm"
+
+[sub_resource type="GDScript" id="GDScript_itei5"]
+resource_name = "CooldownProgress"
+script/source = "extends TextureProgressBar
+
+@onready var cooldown: Timer = $'../Cooldown'
+
+func _process(_delta: float) -> void:
+	max_value = cooldown.wait_time
+	value = cooldown.time_left
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_itei5"]
+font_size = 13
+
+[sub_resource type="GDScript" id="GDScript_ryqoa"]
+resource_name = "cooldown_progress"
+script/source = "extends Label
+
+@onready var cooldown: Timer = $'../Cooldown'
+
+func _process(delta: float) -> void:
+	
+	text = str(snappedf(cooldown.time_left, 0.01) ) + 's'
+"
+
 [node name="Shooting" node_paths=PackedStringArray("cooldown", "weapon_range") groups=["weapon"] instance=ExtResource("1_b2bjx")]
 stats = SubResource("Resource_rhgco")
-effects = Array[ExtResource("5_b7aa5")]([SubResource("Resource_b7aa5")])
+effects = Array[ExtResource("5_b7aa5")]([SubResource("Resource_b7aa5"), SubResource("Resource_n8xky")])
 cooldown = NodePath("Cooldown")
 weapon_range = NodePath("WeaponRange")
 
@@ -49,7 +83,32 @@ position = Vector2(174.99998, -17.5)
 [node name="Cooldown" type="Timer" parent="." index="1"]
 one_shot = true
 
-[node name="WeaponRange" parent="." index="3" instance=ExtResource("6_gn0o1")]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." index="3"]
+visible = false
+modulate = Color(1, 1, 1, 0.5411765)
+offset_left = -11.0
+offset_top = -47.0
+offset_right = 501.0
+offset_bottom = 465.0
+scale = Vector2(0.045, 0.045)
+value = 33.0
+fill_mode = 4
+texture_progress = ExtResource("8_itei5")
+tint_progress = Color(0.74180603, 0.8623922, 0.7266675, 1)
+script = SubResource("GDScript_itei5")
 
-[node name="Controller" type="Node2D" parent="." index="4"]
+[node name="WeaponRange" parent="." index="4" instance=ExtResource("6_gn0o1")]
+
+[node name="Controller" type="Node2D" parent="." index="5"]
 script = ExtResource("7_r2c0f")
+
+[node name="Label" type="Label" parent="." index="6"]
+offset_left = -20.0
+offset_top = -46.0
+offset_right = 20.0
+offset_bottom = -23.0
+text = "2"
+label_settings = SubResource("LabelSettings_itei5")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("GDScript_ryqoa")
