@@ -1,16 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ds16y5s0r4nw8"]
+[gd_scene load_steps=6 format=3 uid="uid://ds16y5s0r4nw8"]
 
 [ext_resource type="Script" uid="uid://c3g2iffx58jmp" path="res://components/weapons/projectiles/continuous_bullet.gd" id="1_v7oki"]
 [ext_resource type="LabelSettings" uid="uid://bulagoaa3g7q6" path="res://Letter.tres" id="2_v8qja"]
 [ext_resource type="PackedScene" uid="uid://cb2roqwnqe0al" path="res://components/hitbox/hit_box.tscn" id="3_t4vbm"]
-[ext_resource type="Script" uid="uid://3wtv26ldj4iu" path="res://effects/effect_res.gd" id="4_b7duk"]
-[ext_resource type="Script" uid="uid://bgho0nn52h27q" path="res://effects/one_hit_damage_res.gd" id="5_b7duk"]
 [ext_resource type="Texture2D" uid="uid://c0mc1peomcbkq" path="res://emojis.png" id="6_wi5sc"]
-
-[sub_resource type="Resource" id="Resource_t2bd8"]
-script = ExtResource("5_b7duk")
-damage = 1
-metadata/_custom_type_script = "uid://bgho0nn52h27q"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7oki"]
 radius = 32.0
@@ -23,8 +16,6 @@ script = ExtResource("1_v7oki")
 rect = Rect2(-33, -33, 66, 66)
 
 [node name="HitBox" parent="." instance=ExtResource("3_t4vbm")]
-collision_mask = 2
-effects = Array[ExtResource("4_b7duk")]([SubResource("Resource_t2bd8")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_v7oki")

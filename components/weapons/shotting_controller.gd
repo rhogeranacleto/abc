@@ -4,8 +4,7 @@ extends Node2D
 @onready var weapon_range: WeaponRange = $'../WeaponRange'
 @onready var marker: Marker2D = $'../GunSprite/Marker2D'
 @onready var cooldown: Timer = $'../Cooldown'
-
-const CONTINUOUS_BULLET = preload('uid://ds16y5s0r4nw8')
+@onready var weapon_controller: WeaponController = $'..'
 
 func _process(_delta: float) -> void:
 	var in_range = weapon_range.get_overlapping_bodies()
@@ -22,12 +21,10 @@ func _process(_delta: float) -> void:
 
 func shoot():
 	cooldown.start()
-	var projectile = CONTINUOUS_BULLET.instantiate()
+	
+	var projectile = ContinuousBullet.instanciate(weapon_controller.effects, weapon_range.collision_mask)
 	
 	get_tree().root.add_child(projectile)
 	
 	projectile.global_rotation = gun_sprite.global_rotation
-	projectile.collision_mask = weapon_range.collision_mask
-	print(owner)
-	projectile.effects = owner.effects
-	
+	projectile.global_position = marker.global_position

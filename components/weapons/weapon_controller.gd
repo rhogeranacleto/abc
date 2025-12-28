@@ -2,7 +2,7 @@ extends Node2D
 class_name WeaponController
 
 @export var stats: Stats
-@export var effecs: Array[Effect]
+@export var effects: Array[Effect]
 @export var cooldown: Timer
 @export var weapon_range: WeaponRange
 
@@ -18,6 +18,7 @@ func _ready() -> void:
 		call_deferred('update_collision_mask')
 	
 	recalculate_range()
+	update_cooldown()
 	
 func recalculate_range():
 	if weapon_range != null:
@@ -27,11 +28,12 @@ func recalculate_range():
 
 func update_cooldown():
 	if cooldown != null:
+		print(stats.get_final_value(Stats.Types.COOLDOWN))
 		cooldown.wait_time = stats.get_final_value(Stats.Types.COOLDOWN)
 
 func update_collision_mask():
 	match owner.collision_layer:
-			1:
-				weapon_range.collision_mask = 2
-			2:
-				weapon_range.collision_mask = 1
+		1:
+			weapon_range.collision_mask = 2
+		2:
+			weapon_range.collision_mask = 1

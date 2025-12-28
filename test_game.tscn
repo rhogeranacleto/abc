@@ -59,7 +59,7 @@ position = Vector2(586, 451)
 position = Vector2(513.608, 231.72946)
 progress = 998.6
 
-[node name="Enemy" parent="Path2D/PathFollow2D2" instance=ExtResource("10_rb8mk")]
+[node name="Soldier" parent="Path2D/PathFollow2D2" instance=ExtResource("10_rb8mk")]
 team = 1
 
 [node name="disabled" type="Node2D" parent="."]

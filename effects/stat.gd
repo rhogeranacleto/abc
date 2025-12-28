@@ -3,7 +3,7 @@ class_name Stat
 
 #signal modifier_changed
 
-@export var base_value : int
+@export var base_value : float
 @export var modifiers : Array[StatBuff]
 
 func calculate_final_value():
