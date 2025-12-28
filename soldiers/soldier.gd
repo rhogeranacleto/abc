@@ -11,11 +11,11 @@ class_name Soldier
 func _ready() -> void:
 	update_team_collision()
 	
-	print(name)
+	#print(name)
 	
-	for child in get_children():
-		if child.is_in_group('weapon'):
-			print(child)
+	#for child in get_children():
+		#if child.is_in_group('weapon'):
+			#print(child)
 
 func update_team_collision():
 	match team:

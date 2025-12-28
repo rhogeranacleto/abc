@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://br45xvw6b2lno"]
-
-[ext_resource type="PackedScene" uid="uid://bim8yrun5ak7u" path="res://target/target.tscn" id="1_sqvb1"]
+[gd_scene load_steps=2 format=3 uid="uid://br45xvw6b2lno"]
 
 [sub_resource type="GDScript" id="GDScript_sqvb1"]
 script/source = "extends PathFollow2D
@@ -14,14 +12,3 @@ func _process(delta: float) -> void:
 [node name="PathFollow2D" type="PathFollow2D"]
 rotates = false
 script = SubResource("GDScript_sqvb1")
-
-[node name="Target" parent="." instance=ExtResource("1_sqvb1")]
-
-[node name="Legs" parent="Target" index="0"]
-speed = 40.0
-
-[node name="HurtBox" parent="Target" index="3"]
-max_health = 1000
-health = 1000
-
-[editable path="Target"]

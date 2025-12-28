@@ -1,0 +1,33 @@
+extends Node2D
+
+@onready var gun_sprite: Sprite2D = $'../GunSprite'
+@onready var weapon_range: WeaponRange = $'../WeaponRange'
+@onready var marker: Marker2D = $'../GunSprite/Marker2D'
+@onready var cooldown: Timer = $'../Cooldown'
+
+const CONTINUOUS_BULLET = preload('uid://ds16y5s0r4nw8')
+
+func _process(_delta: float) -> void:
+	var in_range = weapon_range.get_overlapping_bodies()
+	
+	if in_range.is_empty():
+		return
+	
+	var nearest = in_range.reduce(Helpers.get_nearest_to_position.bind(global_position))
+	
+	gun_sprite.look_at(nearest.global_position)
+	
+	if cooldown.is_stopped():
+		shoot()
+
+func shoot():
+	cooldown.start()
+	var projectile = CONTINUOUS_BULLET.instantiate()
+	
+	get_tree().root.add_child(projectile)
+	
+	projectile.global_rotation = gun_sprite.global_rotation
+	projectile.collision_mask = weapon_range.collision_mask
+	print(owner)
+	projectile.effects = owner.effects
+	
