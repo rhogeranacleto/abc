@@ -8,12 +8,20 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="abc"
-run/main_scene="uid://bg5b4405jx1u8"
-config/features=PackedStringArray("4.5", "Forward Plus")
+run/main_scene="uid://qh82rqe3tbhj"
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="abc"
 
 [editor]
 
@@ -27,6 +35,6 @@ soldier=""
 
 [layer_names]
 
-2d_physics/layer_1="soldier"
-2d_physics/layer_2="target"
+2d_physics/layer_1="player"
+2d_physics/layer_2="enemy"
 2d_physics/layer_3="bullet"

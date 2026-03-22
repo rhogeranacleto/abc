@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://qh82rqe3tbhj"]
+
+[ext_resource type="PackedScene" uid="uid://dmolh61s1q2nt" path="res://map.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://b4rl26gs2kjjm" path="res://letter.tscn" id="2_h2yge"]
+
+[node name="Main" type="Node2D" unique_id=1185887347]
+
+[node name="Map" parent="." unique_id=332361521 instance=ExtResource("1_0xm2m")]
+
+[node name="Letter" parent="." unique_id=796143734 instance=ExtResource("2_h2yge")]
+position = Vector2(128, 192)
+
+[node name="Letter2" parent="." unique_id=788261302 instance=ExtResource("2_h2yge")]
+position = Vector2(256, 192)
+team = 2
