@@ -3,15 +3,18 @@
 [ext_resource type="Script" uid="uid://1c8qqybe7vci" path="res://letter.gd" id="1_kv2n4"]
 [ext_resource type="PackedScene" uid="uid://crpni7i8ktfqb" path="res://health_bar.tscn" id="1_r6swm"]
 [ext_resource type="PackedScene" uid="uid://b3mr6hqx6nxhd" path="res://health_handler.tscn" id="2_5gbsb"]
-[ext_resource type="PackedScene" uid="uid://drgp12k1ee2xn" path="res://hurt_box.tscn" id="3_57kop"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_u08kb"]
 font_size = 64
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kv2n4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57kop"]
 size = Vector2(64, 64)
 
-[node name="Letter" type="Node2D" unique_id=796143734]
+[node name="Letter" type="Area2D" unique_id=275345831]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
 script = ExtResource("1_kv2n4")
 
 [node name="Label" type="Label" parent="." unique_id=970120401]
@@ -25,17 +28,16 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="Healthbar" parent="." unique_id=1024406942 node_paths=PackedStringArray("health_handler") instance=ExtResource("1_r6swm")]
-offset_left = -23.0
-offset_top = -10.0
-offset_right = 86.0
+offset_left = 0.0
+offset_top = -5.0
+offset_right = 64.0
+offset_bottom = 5.0
 health_handler = NodePath("../HealthHandler")
 
 [node name="HealthHandler" parent="." unique_id=1798819983 instance=ExtResource("2_5gbsb")]
 
-[node name="HurtBox" parent="." unique_id=588050865 instance=ExtResource("3_57kop")]
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=770445229]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=195106615]
 position = Vector2(32, 32)
-shape = SubResource("RectangleShape2D_kv2n4")
+shape = SubResource("RectangleShape2D_57kop")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
