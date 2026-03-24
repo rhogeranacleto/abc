@@ -39,8 +39,8 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 
 func select_letter() -> void:
 	selected = true
-	label.scale = Vector2.ONE * 1.5
+	#label.scale = Vector2.ONE * 1.5
 	
 func unselect_letter() -> void:
 	selected = false
-	label.scale = Vector2.ONE
+	#label.scale = Vector2.ONE

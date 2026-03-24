@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://1c8qqybe7vci" path="res://letter.gd" id="1_kv2n4"]
 [ext_resource type="PackedScene" uid="uid://crpni7i8ktfqb" path="res://health_bar.tscn" id="1_r6swm"]
 [ext_resource type="PackedScene" uid="uid://b3mr6hqx6nxhd" path="res://health_handler.tscn" id="2_5gbsb"]
+[ext_resource type="Script" uid="uid://d2qsbxc5kx3ed" path="res://components/drag_and_drop.gd" id="4_kv2n4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_u08kb"]
 font_size = 64
@@ -11,7 +12,6 @@ font_size = 64
 size = Vector2(64, 64)
 
 [node name="Letter" type="Area2D" unique_id=275345831]
-collision_layer = 0
 collision_mask = 0
 monitoring = false
 monitorable = false
@@ -39,5 +39,9 @@ health_handler = NodePath("../HealthHandler")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=195106615]
 position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_57kop")
+
+[node name="DragAndDrop" type="Node" parent="." unique_id=22853373 node_paths=PackedStringArray("target")]
+script = ExtResource("4_kv2n4")
+target = NodePath("..")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
