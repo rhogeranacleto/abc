@@ -11,7 +11,7 @@ font_size = 64
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_57kop"]
 size = Vector2(64, 64)
 
-[node name="Letter" type="Area2D" unique_id=275345831]
+[node name="Letter" type="Area2D" unique_id=275345831 groups=["letters"]]
 collision_mask = 0
 monitoring = false
 monitorable = false
@@ -26,6 +26,7 @@ text = "A"
 label_settings = SubResource("LabelSettings_u08kb")
 horizontal_alignment = 1
 vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Healthbar" parent="." unique_id=1024406942 node_paths=PackedStringArray("health_handler") instance=ExtResource("1_r6swm")]
 offset_left = 0.0
@@ -33,6 +34,7 @@ offset_top = -5.0
 offset_right = 64.0
 offset_bottom = 5.0
 health_handler = NodePath("../HealthHandler")
+metadata/_edit_use_anchors_ = true
 
 [node name="HealthHandler" parent="." unique_id=1798819983 instance=ExtResource("2_5gbsb")]
 

@@ -24,3 +24,6 @@ func remove_unit(tile: Vector2i) -> void:
 	
 	units[tile] = null
 	unit_grid_changed.emit()
+
+func is_tile_occupied(tile: Vector2i) -> bool:
+	return units[tile] != null
